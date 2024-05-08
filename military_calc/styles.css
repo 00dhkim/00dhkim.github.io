@@ -1,0 +1,58 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#progressBarContainer {
+    width: 80%;
+    height: 30px;
+    background-color: #ddd;
+    margin: 20px auto;
+    border-radius: 15px;
+}
+
+#progressBar {
+    height: 100%;
+    background-color: #4CAF50;
+    width: 0%;
+    border-radius: 15px;
+    transition: width 0.5s ease-in-out;
+}
+
+#circleContainer {
+    margin: 20px auto;
+    width: 200px;
+    height: 200px;
+}
+
+#circleProgress {
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+circle {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+
+#percentageDisplay {
+    font-size: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
