@@ -1,26 +1,503 @@
-<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>나의 운동 리듬</title><meta name="description" content="운동한 날을 모아, 나만의 꾸준함을 확인하세요."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232d624e'/%3E%3Cpath d='M7 18h5l3-9 4 15 3-6h4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E"><script src="https://accounts.google.com/gsi/client" async defer></script>
-<style>
-:root{color-scheme:dark;--bg:#101112;--card:#1b1d20;--line:#303236;--ink:#f3f3f4;--muted:#a3a7ad;--accent:#ff8b4c}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}main{max-width:1100px;margin:auto;padding:0 30px 40px}header{display:flex;align-items:center;justify-content:space-between;height:96px;border-bottom:1px solid var(--line);gap:14px}.brand{font-size:25px;font-weight:750;letter-spacing:-1px}.brand span{color:var(--accent)}.brand small{font-size:12px;color:var(--muted);font-weight:400;letter-spacing:0;margin-left:14px}.heading{display:flex;justify-content:space-between;align-items:end;padding:32px 0 24px}h1{font-size:28px;letter-spacing:-1px;line-height:1.3;margin:0}h2{font-size:18px;margin:0;letter-spacing:-.5px}.eyebrow{font-size:12px;color:var(--accent);letter-spacing:2px;font-weight:600;margin-bottom:6px}.muted,small{color:var(--muted)}button,select,input{font:inherit;color:var(--ink);background:#24262a;border:1px solid #3a3d42;border-radius:12px;padding:10px 14px;min-height:44px}button{cursor:pointer;font-size:14px;font-weight:600;transition:background .15s}button:hover{background:#36393e}.primary{background:var(--accent);border-color:var(--accent);color:#21150e}.primary:hover{background:#ffa571}button:disabled{opacity:.45;cursor:wait}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}label{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--muted)}.toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 0 24px}.toolbar label:first-child{margin-right:auto}.toolbar input,.toolbar select{font-size:14px;padding:8px 10px}.toolbar input{max-width:155px}.connection-panel{padding:0 0 8px}.connection-panel>.row{margin-top:12px}#status{font-size:13px;color:var(--muted)}#demo,#logout{border:0;background:none;color:var(--muted);padding:8px}#refresh{font-size:13px}#calendar{max-width:240px}.overview{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}.hero,.card{background:var(--card);border:1px solid #292c30;border-radius:24px;padding:28px}.hero{display:flex;flex-direction:column;justify-content:space-between;min-height:300px}.hero-top{display:flex;justify-content:space-between;align-items:center}.hero-top p{margin:0;font-size:15px;color:#d3d5d8}.hero-tag{font-size:12px;color:var(--accent);background:#ff8b4c12;border-radius:20px;padding:4px 10px}.big{font-size:90px;letter-spacing:-5px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;margin:20px 0 24px}.big span{font-size:20px;letter-spacing:-.6px;color:var(--muted);font-weight:400;margin-left:8px}#summary{font-size:13px;color:var(--muted);margin:0;max-width:100%}.ratio-card{display:flex;align-items:center;justify-content:center;gap:26px}.ring{width:170px;height:170px;flex-shrink:0;border-radius:50%;background:conic-gradient(var(--accent) var(--sweep,0%),#34363a 0);padding:12px}.ring-inner{border-radius:50%;background:var(--card);height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}.ring strong{font-size:35px;letter-spacing:-1px;font-weight:600}.ring small{font-size:12px}.ratio-copy strong{display:block;font-size:18px;margin-bottom:8px}.ratio-copy p{font-size:13px;color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:18px 0 28px}.grid .card{padding:22px 26px;border-radius:20px}.grid .muted{font-size:14px}.number{font-size:32px;margin-top:9px;font-weight:600;letter-spacing:-1px;font-variant-numeric:tabular-nums}.metric-index{display:none}.calendar-card{padding:28px}.calendar-head{justify-content:space-between;gap:14px;margin-bottom:30px}.calendar-head p{font-size:13px;color:var(--muted);margin:5px 0 0}.months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}.monthTitle{font-size:14px;font-weight:600;margin-bottom:20px}.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.weekday{font-size:12px;text-align:center;color:var(--muted);padding-bottom:9px}.day{aspect-ratio:1;display:grid;place-items:center;font-size:12px;background:#26282c;color:#b2b5bc;border-radius:50%;font-variant-numeric:tabular-nums}.hit{background:var(--accent);color:#21150e;font-weight:700}.today{box-shadow:0 0 0 1px #dedfe1}.future{opacity:.3}.calendar-note{font-size:12px;display:flex;align-items:center;gap:8px;margin:28px 0 0}.legend{height:8px;width:8px;border-radius:50%;background:var(--accent)}#prev,#next{width:44px;padding:8px;font-size:20px}.settings-link{border:0;background:none;color:var(--muted)}details{margin-top:20px}summary{cursor:pointer;font-size:14px}#settings{padding:18px 22px;background:transparent}#settings p,#settings li{font-size:14px;color:var(--muted)}#settings li{margin-bottom:10px}#settings label{display:block;margin-top:16px}#clientId{width:100%;margin:8px 0 12px;font-size:14px}a{color:var(--accent)}code{overflow-wrap:anywhere}footer{font-size:12px;color:#8c9199;line-height:1.9;margin-top:24px}:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-@media(max-width:800px){main{padding:0 18px 30px}header{height:80px}.brand{font-size:22px}.brand small{display:none}header .primary{font-size:12px;padding:10px 12px}.heading{padding:26px 0 18px}h1{font-size:25px}.toolbar{gap:10px;padding:12px 0 18px}.toolbar label{flex:1;min-width:0;font-size:12px;gap:6px}.toolbar label:first-child{flex-basis:100%;margin:0}.toolbar input{min-width:0;width:100%;max-width:none;font-size:13px}.toolbar select{font-size:13px}.overview{grid-template-columns:1fr;gap:12px}.hero{min-height:238px;padding:24px}.big{font-size:76px;margin:22px 0}.big span{font-size:19px}.ratio-card{padding:20px;justify-content:flex-start;gap:24px}.ring{width:105px;height:105px;padding:8px}.ring strong{font-size:25px}.ring small{font-size:12px}.ratio-copy strong{font-size:16px}.grid{gap:9px;margin:12px 0 22px}.grid .card{padding:17px 12px;border-radius:16px}.grid .muted{font-size:12px;min-height:38px}.number{font-size:26px;margin:0}.calendar-card{padding:24px 20px}.months{grid-template-columns:1fr;gap:32px}.days{gap:10px}.day{aspect-ratio:1;font-size:14px;max-height:44px}.monthTitle{font-size:16px}.calendar-head{margin-bottom:24px}.calendar-head p{font-size:12px}.calendar-head h2{font-size:17px}.calendar-head .row{gap:6px}#prev,#next{width:40px}#settings{padding:16px}footer{font-size:12px}#calendar{max-width:185px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style></head><body><main>
-<header><div class="brand">rhythm<span>.</span><small>나의 운동 기록</small></div><button id="connect" class="primary">Google 캘린더 연결</button></header>
-<div class="heading"><div><div class="eyebrow">ACTIVITY OVERVIEW</div><h1>나의 운동 리듬</h1></div><button class="settings-link" id="openSettings">설정</button></div><div class="connection-panel">
-<div id="status" role="status" aria-live="polite">캘린더를 연결하면 나의 운동 기록이 표시됩니다.</div>
-<div class="row"><button id="demo">예시 둘러보기</button><button id="refresh" hidden>새로고침</button><button id="logout" hidden>연결 해제</button><label id="calendarLabel" hidden>캘린더 <select id="calendar"></select></label></div>
-</div><div class="toolbar row"><label>기간 <select id="period"><option value="all">전체 기록</option><option value="30">최근 30일</option><option value="90">최근 90일</option><option value="custom">직접 선택</option></select></label><label>시작 <input type="date" id="start"></label><label>종료 <input type="date" id="end"></label></div>
-<div class="overview"><section class="hero" aria-label="평균 운동 빈도"><div class="hero-top"><p>나의 평균 운동 빈도</p><span class="hero-tag">AVERAGE</span></div><div class="big" id="average">— <span>일에 한 번</span></div><p id="summary">운동 기록을 기다리고 있어요.</p></section>
-<section class="card ratio-card"><div class="ring" id="ring" role="img" aria-label="운동한 날의 비율"><div class="ring-inner"><strong id="ratio">—</strong><small>운동한 날</small></div></div><div class="ratio-copy"><strong>쌓여가는 꾸준함</strong><p id="ratioDescription">나의 기록을 연결해 보세요.</p></div></section></div><div class="grid"><section class="card"><span class="metric-index" aria-hidden="true">01 / DAYS</span><div class="muted">운동한 날</div><div class="number" id="count">—</div></section><section class="card"><span class="metric-index" aria-hidden="true">02 / WEEK</span><div class="muted">주당 평균</div><div class="number" id="weekly">—</div></section><section class="card"><span class="metric-index" aria-hidden="true">03 / REST</span><div class="muted">마지막 운동 이후</div><div class="number" id="since">—</div></section></div>
-<section class="card calendar-card"><div class="row calendar-head" style="justify-content:space-between"><div><h2>운동한 날의 흔적</h2><p>움직인 날은 오렌지색으로 남아요.</p></div><div class="row"><button id="prev" aria-label="이전 3개월">←</button><button id="next" aria-label="다음 3개월">→</button></div></div><div class="months" id="months"></div><p class="muted calendar-note"><span class="legend" aria-hidden="true"></span>운동한 날 · 같은 날의 여러 기록은 하루로 계산합니다.</p></section>
-<details class="card" id="settings"><summary>Google 연결 설정</summary><p>처음 한 번, 개인 Google Cloud 프로젝트의 웹 애플리케이션 OAuth 클라이언트 ID를 입력하세요. 클라이언트 시크릿은 필요하지 않습니다.</p><label for="clientId">OAuth 클라이언트 ID</label><input id="clientId" placeholder="…apps.googleusercontent.com" autocomplete="off"><button id="save">설정 저장</button><ol><li><a href="https://console.cloud.google.com/apis/library/calendar-json.googleapis.com" target="_blank" rel="noopener">Google Cloud</a>에서 개인 프로젝트를 만들고 Google Calendar API를 활성화합니다.</li><li>Google Auth Platform에서 대상을 외부 / 테스트로 설정하고, 테스트 사용자에 개인 Google 이메일을 추가합니다.</li><li>클라이언트 → 웹 애플리케이션을 만들고 승인된 JavaScript 원본에 <code id="origin"></code>를 추가합니다.</li><li>발급된 클라이언트 ID를 위에 저장한 뒤 Google 캘린더 연결을 누릅니다.</li></ol><p>클라이언트 ID·선택한 캘린더·기간은 이 브라우저에 자동 저장합니다. 로그인은 현재 탭에서 새로고침해도 만료 전까지 유지합니다. 인증이 만료되거나 탭을 닫으면 다시 연결해 주세요. 운동 기록과 인증 토큰은 GitHub에 업로드하지 않습니다.</p></details>
-<footer>계산: 시작일과 종료일을 포함한 전체 일수 ÷ 운동한 날짜 수. 쉬는 날도 기간에 포함합니다.<br>Google 캘린더에 기록된 운동 시작일 기준 · 한국 시간 · 미래 일정 및 취소 일정 제외</footer>
-</main><script>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f8fa"><title>Rhythm — 나의 운동 리듬</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%235c56df'/%3E%3Ctext x='9' y='24' fill='white' font-size='26' font-family='sans-serif'%3Er%3C/text%3E%3C/svg%3E"><script src="https://accounts.google.com/gsi/client" async defer></script><script src="ui.js"></script><style>:root,
+:host,
+.sl-theme-light {
+  color-scheme: light;
+
+  --sl-color-gray-50: hsl(0 0% 97.5%);
+  --sl-color-gray-100: hsl(240 4.8% 95.9%);
+  --sl-color-gray-200: hsl(240 5.9% 90%);
+  --sl-color-gray-300: hsl(240 4.9% 83.9%);
+  --sl-color-gray-400: hsl(240 5% 64.9%);
+  --sl-color-gray-500: hsl(240 3.8% 46.1%);
+  --sl-color-gray-600: hsl(240 5.2% 33.9%);
+  --sl-color-gray-700: hsl(240 5.3% 26.1%);
+  --sl-color-gray-800: hsl(240 3.7% 15.9%);
+  --sl-color-gray-900: hsl(240 5.9% 10%);
+  --sl-color-gray-950: hsl(240 7.3% 8%);
+
+  --sl-color-red-50: hsl(0 85.7% 97.3%);
+  --sl-color-red-100: hsl(0 93.3% 94.1%);
+  --sl-color-red-200: hsl(0 96.3% 89.4%);
+  --sl-color-red-300: hsl(0 93.5% 81.8%);
+  --sl-color-red-400: hsl(0 90.6% 70.8%);
+  --sl-color-red-500: hsl(0 84.2% 60.2%);
+  --sl-color-red-600: hsl(0 72.2% 50.6%);
+  --sl-color-red-700: hsl(0 73.7% 41.8%);
+  --sl-color-red-800: hsl(0 70% 35.3%);
+  --sl-color-red-900: hsl(0 62.8% 30.6%);
+  --sl-color-red-950: hsl(0 60% 19.6%);
+
+  --sl-color-orange-50: hsl(33.3 100% 96.5%);
+  --sl-color-orange-100: hsl(34.3 100% 91.8%);
+  --sl-color-orange-200: hsl(32.1 97.7% 83.1%);
+  --sl-color-orange-300: hsl(30.7 97.2% 72.4%);
+  --sl-color-orange-400: hsl(27 96% 61%);
+  --sl-color-orange-500: hsl(24.6 95% 53.1%);
+  --sl-color-orange-600: hsl(20.5 90.2% 48.2%);
+  --sl-color-orange-700: hsl(17.5 88.3% 40.4%);
+  --sl-color-orange-800: hsl(15 79.1% 33.7%);
+  --sl-color-orange-900: hsl(15.3 74.6% 27.8%);
+  --sl-color-orange-950: hsl(15.2 69.1% 19%);
+
+  --sl-color-amber-50: hsl(48 100% 96.1%);
+  --sl-color-amber-100: hsl(48 96.5% 88.8%);
+  --sl-color-amber-200: hsl(48 96.6% 76.7%);
+  --sl-color-amber-300: hsl(45.9 96.7% 64.5%);
+  --sl-color-amber-400: hsl(43.3 96.4% 56.3%);
+  --sl-color-amber-500: hsl(37.7 92.1% 50.2%);
+  --sl-color-amber-600: hsl(32.1 94.6% 43.7%);
+  --sl-color-amber-700: hsl(26 90.5% 37.1%);
+  --sl-color-amber-800: hsl(22.7 82.5% 31.4%);
+  --sl-color-amber-900: hsl(21.7 77.8% 26.5%);
+  --sl-color-amber-950: hsl(22.9 74.1% 16.7%);
+
+  --sl-color-yellow-50: hsl(54.5 91.7% 95.3%);
+  --sl-color-yellow-100: hsl(54.9 96.7% 88%);
+  --sl-color-yellow-200: hsl(52.8 98.3% 76.9%);
+  --sl-color-yellow-300: hsl(50.4 97.8% 63.5%);
+  --sl-color-yellow-400: hsl(47.9 95.8% 53.1%);
+  --sl-color-yellow-500: hsl(45.4 93.4% 47.5%);
+  --sl-color-yellow-600: hsl(40.6 96.1% 40.4%);
+  --sl-color-yellow-700: hsl(35.5 91.7% 32.9%);
+  --sl-color-yellow-800: hsl(31.8 81% 28.8%);
+  --sl-color-yellow-900: hsl(28.4 72.5% 25.7%);
+  --sl-color-yellow-950: hsl(33.1 69% 13.9%);
+
+  --sl-color-lime-50: hsl(78.3 92% 95.1%);
+  --sl-color-lime-100: hsl(79.6 89.1% 89.2%);
+  --sl-color-lime-200: hsl(80.9 88.5% 79.6%);
+  --sl-color-lime-300: hsl(82 84.5% 67.1%);
+  --sl-color-lime-400: hsl(82.7 78% 55.5%);
+  --sl-color-lime-500: hsl(83.7 80.5% 44.3%);
+  --sl-color-lime-600: hsl(84.8 85.2% 34.5%);
+  --sl-color-lime-700: hsl(85.9 78.4% 27.3%);
+  --sl-color-lime-800: hsl(86.3 69% 22.7%);
+  --sl-color-lime-900: hsl(87.6 61.2% 20.2%);
+  --sl-color-lime-950: hsl(86.5 60.6% 13.9%);
+
+  --sl-color-green-50: hsl(138.5 76.5% 96.7%);
+  --sl-color-green-100: hsl(140.6 84.2% 92.5%);
+  --sl-color-green-200: hsl(141 78.9% 85.1%);
+  --sl-color-green-300: hsl(141.7 76.6% 73.1%);
+  --sl-color-green-400: hsl(141.9 69.2% 58%);
+  --sl-color-green-500: hsl(142.1 70.6% 45.3%);
+  --sl-color-green-600: hsl(142.1 76.2% 36.3%);
+  --sl-color-green-700: hsl(142.4 71.8% 29.2%);
+  --sl-color-green-800: hsl(142.8 64.2% 24.1%);
+  --sl-color-green-900: hsl(143.8 61.2% 20.2%);
+  --sl-color-green-950: hsl(144.3 60.7% 12%);
+
+  --sl-color-emerald-50: hsl(151.8 81% 95.9%);
+  --sl-color-emerald-100: hsl(149.3 80.4% 90%);
+  --sl-color-emerald-200: hsl(152.4 76% 80.4%);
+  --sl-color-emerald-300: hsl(156.2 71.6% 66.9%);
+  --sl-color-emerald-400: hsl(158.1 64.4% 51.6%);
+  --sl-color-emerald-500: hsl(160.1 84.1% 39.4%);
+  --sl-color-emerald-600: hsl(161.4 93.5% 30.4%);
+  --sl-color-emerald-700: hsl(162.9 93.5% 24.3%);
+  --sl-color-emerald-800: hsl(163.1 88.1% 19.8%);
+  --sl-color-emerald-900: hsl(164.2 85.7% 16.5%);
+  --sl-color-emerald-950: hsl(164.3 87.5% 9.4%);
+
+  --sl-color-teal-50: hsl(166.2 76.5% 96.7%);
+  --sl-color-teal-100: hsl(167.2 85.5% 89.2%);
+  --sl-color-teal-200: hsl(168.4 83.8% 78.2%);
+  --sl-color-teal-300: hsl(170.6 76.9% 64.3%);
+  --sl-color-teal-400: hsl(172.5 66% 50.4%);
+  --sl-color-teal-500: hsl(173.4 80.4% 40%);
+  --sl-color-teal-600: hsl(174.7 83.9% 31.6%);
+  --sl-color-teal-700: hsl(175.3 77.4% 26.1%);
+  --sl-color-teal-800: hsl(176.1 69.4% 21.8%);
+  --sl-color-teal-900: hsl(175.9 60.8% 19%);
+  --sl-color-teal-950: hsl(176.5 58.6% 11.4%);
+
+  --sl-color-cyan-50: hsl(183.2 100% 96.3%);
+  --sl-color-cyan-100: hsl(185.1 95.9% 90.4%);
+  --sl-color-cyan-200: hsl(186.2 93.5% 81.8%);
+  --sl-color-cyan-300: hsl(187 92.4% 69%);
+  --sl-color-cyan-400: hsl(187.9 85.7% 53.3%);
+  --sl-color-cyan-500: hsl(188.7 94.5% 42.7%);
+  --sl-color-cyan-600: hsl(191.6 91.4% 36.5%);
+  --sl-color-cyan-700: hsl(192.9 82.3% 31%);
+  --sl-color-cyan-800: hsl(194.4 69.6% 27.1%);
+  --sl-color-cyan-900: hsl(196.4 63.6% 23.7%);
+  --sl-color-cyan-950: hsl(196.8 61% 16.1%);
+
+  --sl-color-sky-50: hsl(204 100% 97.1%);
+  --sl-color-sky-100: hsl(204 93.8% 93.7%);
+  --sl-color-sky-200: hsl(200.6 94.4% 86.1%);
+  --sl-color-sky-300: hsl(199.4 95.5% 73.9%);
+  --sl-color-sky-400: hsl(198.4 93.2% 59.6%);
+  --sl-color-sky-500: hsl(198.6 88.7% 48.4%);
+  --sl-color-sky-600: hsl(200.4 98% 39.4%);
+  --sl-color-sky-700: hsl(201.3 96.3% 32.2%);
+  --sl-color-sky-800: hsl(201 90% 27.5%);
+  --sl-color-sky-900: hsl(202 80.3% 23.9%);
+  --sl-color-sky-950: hsl(202.3 73.8% 16.5%);
+
+  --sl-color-blue-50: hsl(213.8 100% 96.9%);
+  --sl-color-blue-100: hsl(214.3 94.6% 92.7%);
+  --sl-color-blue-200: hsl(213.3 96.9% 87.3%);
+  --sl-color-blue-300: hsl(211.7 96.4% 78.4%);
+  --sl-color-blue-400: hsl(213.1 93.9% 67.8%);
+  --sl-color-blue-500: hsl(217.2 91.2% 59.8%);
+  --sl-color-blue-600: hsl(221.2 83.2% 53.3%);
+  --sl-color-blue-700: hsl(224.3 76.3% 48%);
+  --sl-color-blue-800: hsl(225.9 70.7% 40.2%);
+  --sl-color-blue-900: hsl(224.4 64.3% 32.9%);
+  --sl-color-blue-950: hsl(226.2 55.3% 18.4%);
+
+  --sl-color-indigo-50: hsl(225.9 100% 96.7%);
+  --sl-color-indigo-100: hsl(226.5 100% 93.9%);
+  --sl-color-indigo-200: hsl(228 96.5% 88.8%);
+  --sl-color-indigo-300: hsl(229.7 93.5% 81.8%);
+  --sl-color-indigo-400: hsl(234.5 89.5% 73.9%);
+  --sl-color-indigo-500: hsl(238.7 83.5% 66.7%);
+  --sl-color-indigo-600: hsl(243.4 75.4% 58.6%);
+  --sl-color-indigo-700: hsl(244.5 57.9% 50.6%);
+  --sl-color-indigo-800: hsl(243.7 54.5% 41.4%);
+  --sl-color-indigo-900: hsl(242.2 47.4% 34.3%);
+  --sl-color-indigo-950: hsl(243.5 43.6% 22.9%);
+
+  --sl-color-violet-50: hsl(250 100% 97.6%);
+  --sl-color-violet-100: hsl(251.4 91.3% 95.5%);
+  --sl-color-violet-200: hsl(250.5 95.2% 91.8%);
+  --sl-color-violet-300: hsl(252.5 94.7% 85.1%);
+  --sl-color-violet-400: hsl(255.1 91.7% 76.3%);
+  --sl-color-violet-500: hsl(258.3 89.5% 66.3%);
+  --sl-color-violet-600: hsl(262.1 83.3% 57.8%);
+  --sl-color-violet-700: hsl(263.4 70% 50.4%);
+  --sl-color-violet-800: hsl(263.4 69.3% 42.2%);
+  --sl-color-violet-900: hsl(263.5 67.4% 34.9%);
+  --sl-color-violet-950: hsl(265.1 61.5% 21.4%);
+
+  --sl-color-purple-50: hsl(270 100% 98%);
+  --sl-color-purple-100: hsl(268.7 100% 95.5%);
+  --sl-color-purple-200: hsl(268.6 100% 91.8%);
+  --sl-color-purple-300: hsl(269.2 97.4% 85.1%);
+  --sl-color-purple-400: hsl(270 95.2% 75.3%);
+  --sl-color-purple-500: hsl(270.7 91% 65.1%);
+  --sl-color-purple-600: hsl(271.5 81.3% 55.9%);
+  --sl-color-purple-700: hsl(272.1 71.7% 47.1%);
+  --sl-color-purple-800: hsl(272.9 67.2% 39.4%);
+  --sl-color-purple-900: hsl(273.6 65.6% 32%);
+  --sl-color-purple-950: hsl(276 59.5% 16.5%);
+
+  --sl-color-fuchsia-50: hsl(289.1 100% 97.8%);
+  --sl-color-fuchsia-100: hsl(287 100% 95.5%);
+  --sl-color-fuchsia-200: hsl(288.3 95.8% 90.6%);
+  --sl-color-fuchsia-300: hsl(291.1 93.1% 82.9%);
+  --sl-color-fuchsia-400: hsl(292 91.4% 72.5%);
+  --sl-color-fuchsia-500: hsl(292.2 84.1% 60.6%);
+  --sl-color-fuchsia-600: hsl(293.4 69.5% 48.8%);
+  --sl-color-fuchsia-700: hsl(294.7 72.4% 39.8%);
+  --sl-color-fuchsia-800: hsl(295.4 70.2% 32.9%);
+  --sl-color-fuchsia-900: hsl(296.7 63.6% 28%);
+  --sl-color-fuchsia-950: hsl(297.1 56.8% 14.5%);
+
+  --sl-color-pink-50: hsl(327.3 73.3% 97.1%);
+  --sl-color-pink-100: hsl(325.7 77.8% 94.7%);
+  --sl-color-pink-200: hsl(325.9 84.6% 89.8%);
+  --sl-color-pink-300: hsl(327.4 87.1% 81.8%);
+  --sl-color-pink-400: hsl(328.6 85.5% 70.2%);
+  --sl-color-pink-500: hsl(330.4 81.2% 60.4%);
+  --sl-color-pink-600: hsl(333.3 71.4% 50.6%);
+  --sl-color-pink-700: hsl(335.1 77.6% 42%);
+  --sl-color-pink-800: hsl(335.8 74.4% 35.3%);
+  --sl-color-pink-900: hsl(335.9 69% 30.4%);
+  --sl-color-pink-950: hsl(336.2 65.4% 15.9%);
+
+  --sl-color-rose-50: hsl(355.7 100% 97.3%);
+  --sl-color-rose-100: hsl(355.6 100% 94.7%);
+  --sl-color-rose-200: hsl(352.7 96.1% 90%);
+  --sl-color-rose-300: hsl(352.6 95.7% 81.8%);
+  --sl-color-rose-400: hsl(351.3 94.5% 71.4%);
+  --sl-color-rose-500: hsl(349.7 89.2% 60.2%);
+  --sl-color-rose-600: hsl(346.8 77.2% 49.8%);
+  --sl-color-rose-700: hsl(345.3 82.7% 40.8%);
+  --sl-color-rose-800: hsl(343.4 79.7% 34.7%);
+  --sl-color-rose-900: hsl(341.5 75.5% 30.4%);
+  --sl-color-rose-950: hsl(341.3 70.1% 17.1%);
+
+  --sl-color-primary-50: var(--sl-color-sky-50);
+  --sl-color-primary-100: var(--sl-color-sky-100);
+  --sl-color-primary-200: var(--sl-color-sky-200);
+  --sl-color-primary-300: var(--sl-color-sky-300);
+  --sl-color-primary-400: var(--sl-color-sky-400);
+  --sl-color-primary-500: var(--sl-color-sky-500);
+  --sl-color-primary-600: var(--sl-color-sky-600);
+  --sl-color-primary-700: var(--sl-color-sky-700);
+  --sl-color-primary-800: var(--sl-color-sky-800);
+  --sl-color-primary-900: var(--sl-color-sky-900);
+  --sl-color-primary-950: var(--sl-color-sky-950);
+
+  --sl-color-success-50: var(--sl-color-green-50);
+  --sl-color-success-100: var(--sl-color-green-100);
+  --sl-color-success-200: var(--sl-color-green-200);
+  --sl-color-success-300: var(--sl-color-green-300);
+  --sl-color-success-400: var(--sl-color-green-400);
+  --sl-color-success-500: var(--sl-color-green-500);
+  --sl-color-success-600: var(--sl-color-green-600);
+  --sl-color-success-700: var(--sl-color-green-700);
+  --sl-color-success-800: var(--sl-color-green-800);
+  --sl-color-success-900: var(--sl-color-green-900);
+  --sl-color-success-950: var(--sl-color-green-950);
+
+  --sl-color-warning-50: var(--sl-color-amber-50);
+  --sl-color-warning-100: var(--sl-color-amber-100);
+  --sl-color-warning-200: var(--sl-color-amber-200);
+  --sl-color-warning-300: var(--sl-color-amber-300);
+  --sl-color-warning-400: var(--sl-color-amber-400);
+  --sl-color-warning-500: var(--sl-color-amber-500);
+  --sl-color-warning-600: var(--sl-color-amber-600);
+  --sl-color-warning-700: var(--sl-color-amber-700);
+  --sl-color-warning-800: var(--sl-color-amber-800);
+  --sl-color-warning-900: var(--sl-color-amber-900);
+  --sl-color-warning-950: var(--sl-color-amber-950);
+
+  --sl-color-danger-50: var(--sl-color-red-50);
+  --sl-color-danger-100: var(--sl-color-red-100);
+  --sl-color-danger-200: var(--sl-color-red-200);
+  --sl-color-danger-300: var(--sl-color-red-300);
+  --sl-color-danger-400: var(--sl-color-red-400);
+  --sl-color-danger-500: var(--sl-color-red-500);
+  --sl-color-danger-600: var(--sl-color-red-600);
+  --sl-color-danger-700: var(--sl-color-red-700);
+  --sl-color-danger-800: var(--sl-color-red-800);
+  --sl-color-danger-900: var(--sl-color-red-900);
+  --sl-color-danger-950: var(--sl-color-red-950);
+
+  --sl-color-neutral-50: var(--sl-color-gray-50);
+  --sl-color-neutral-100: var(--sl-color-gray-100);
+  --sl-color-neutral-200: var(--sl-color-gray-200);
+  --sl-color-neutral-300: var(--sl-color-gray-300);
+  --sl-color-neutral-400: var(--sl-color-gray-400);
+  --sl-color-neutral-500: var(--sl-color-gray-500);
+  --sl-color-neutral-600: var(--sl-color-gray-600);
+  --sl-color-neutral-700: var(--sl-color-gray-700);
+  --sl-color-neutral-800: var(--sl-color-gray-800);
+  --sl-color-neutral-900: var(--sl-color-gray-900);
+  --sl-color-neutral-950: var(--sl-color-gray-950);
+
+  --sl-color-neutral-0: hsl(0, 0%, 100%);
+  --sl-color-neutral-1000: hsl(0, 0%, 0%);
+
+  --sl-border-radius-small: 0.1875rem;
+  --sl-border-radius-medium: 0.25rem;
+  --sl-border-radius-large: 0.5rem;
+  --sl-border-radius-x-large: 1rem;
+
+  --sl-border-radius-circle: 50%;
+  --sl-border-radius-pill: 9999px;
+
+  --sl-shadow-x-small: 0 1px 2px hsl(240 3.8% 46.1% / 6%);
+  --sl-shadow-small: 0 1px 2px hsl(240 3.8% 46.1% / 12%);
+  --sl-shadow-medium: 0 2px 4px hsl(240 3.8% 46.1% / 12%);
+  --sl-shadow-large: 0 2px 8px hsl(240 3.8% 46.1% / 12%);
+  --sl-shadow-x-large: 0 4px 16px hsl(240 3.8% 46.1% / 12%);
+
+  --sl-spacing-3x-small: 0.125rem;
+  --sl-spacing-2x-small: 0.25rem;
+  --sl-spacing-x-small: 0.5rem;
+  --sl-spacing-small: 0.75rem;
+  --sl-spacing-medium: 1rem;
+  --sl-spacing-large: 1.25rem;
+  --sl-spacing-x-large: 1.75rem;
+  --sl-spacing-2x-large: 2.25rem;
+  --sl-spacing-3x-large: 3rem;
+  --sl-spacing-4x-large: 4.5rem;
+
+  --sl-transition-x-slow: 1000ms;
+  --sl-transition-slow: 500ms;
+  --sl-transition-medium: 250ms;
+  --sl-transition-fast: 150ms;
+  --sl-transition-x-fast: 50ms;
+
+  --sl-font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  --sl-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --sl-font-serif: Georgia, "Times New Roman", serif;
+
+  --sl-font-size-2x-small: 0.625rem;
+  --sl-font-size-x-small: 0.75rem;
+  --sl-font-size-small: 0.875rem;
+  --sl-font-size-medium: 1rem;
+  --sl-font-size-large: 1.25rem;
+  --sl-font-size-x-large: 1.5rem;
+  --sl-font-size-2x-large: 2.25rem;
+  --sl-font-size-3x-large: 3rem;
+  --sl-font-size-4x-large: 4.5rem;
+
+  --sl-font-weight-light: 300;
+  --sl-font-weight-normal: 400;
+  --sl-font-weight-semibold: 500;
+  --sl-font-weight-bold: 700;
+
+  --sl-letter-spacing-denser: -0.03em;
+  --sl-letter-spacing-dense: -0.015em;
+  --sl-letter-spacing-normal: normal;
+  --sl-letter-spacing-loose: 0.075em;
+  --sl-letter-spacing-looser: 0.15em;
+
+  --sl-line-height-denser: 1;
+  --sl-line-height-dense: 1.4;
+  --sl-line-height-normal: 1.8;
+  --sl-line-height-loose: 2.2;
+  --sl-line-height-looser: 2.6;
+
+  --sl-focus-ring-color: var(--sl-color-primary-600);
+  --sl-focus-ring-style: solid;
+  --sl-focus-ring-width: 3px;
+  --sl-focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width)
+    var(--sl-focus-ring-color);
+  --sl-focus-ring-offset: 1px;
+
+  --sl-button-font-size-small: var(--sl-font-size-x-small);
+  --sl-button-font-size-medium: var(--sl-font-size-small);
+  --sl-button-font-size-large: var(--sl-font-size-medium);
+
+  --sl-input-height-small: 1.875rem;
+  --sl-input-height-medium: 2.5rem;
+  --sl-input-height-large: 3.125rem;
+
+  --sl-input-background-color: var(--sl-color-neutral-0);
+  --sl-input-background-color-hover: var(--sl-input-background-color);
+  --sl-input-background-color-focus: var(--sl-input-background-color);
+  --sl-input-background-color-disabled: var(--sl-color-neutral-100);
+  --sl-input-border-color: var(--sl-color-neutral-300);
+  --sl-input-border-color-hover: var(--sl-color-neutral-400);
+  --sl-input-border-color-focus: var(--sl-color-primary-500);
+  --sl-input-border-color-disabled: var(--sl-color-neutral-300);
+  --sl-input-border-width: 1px;
+  --sl-input-required-content: "*";
+  --sl-input-required-content-offset: -2px;
+  --sl-input-required-content-color: var(--sl-input-label-color);
+
+  --sl-input-border-radius-small: var(--sl-border-radius-medium);
+  --sl-input-border-radius-medium: var(--sl-border-radius-medium);
+  --sl-input-border-radius-large: var(--sl-border-radius-medium);
+
+  --sl-input-font-family: var(--sl-font-sans);
+  --sl-input-font-weight: var(--sl-font-weight-normal);
+  --sl-input-font-size-small: var(--sl-font-size-small);
+  --sl-input-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-font-size-large: var(--sl-font-size-large);
+  --sl-input-letter-spacing: var(--sl-letter-spacing-normal);
+
+  --sl-input-color: var(--sl-color-neutral-700);
+  --sl-input-color-hover: var(--sl-color-neutral-700);
+  --sl-input-color-focus: var(--sl-color-neutral-700);
+  --sl-input-color-disabled: var(--sl-color-neutral-900);
+  --sl-input-icon-color: var(--sl-color-neutral-500);
+  --sl-input-icon-color-hover: var(--sl-color-neutral-600);
+  --sl-input-icon-color-focus: var(--sl-color-neutral-600);
+  --sl-input-placeholder-color: var(--sl-color-neutral-500);
+  --sl-input-placeholder-color-disabled: var(--sl-color-neutral-600);
+  --sl-input-spacing-small: var(--sl-spacing-small);
+  --sl-input-spacing-medium: var(--sl-spacing-medium);
+  --sl-input-spacing-large: var(--sl-spacing-large);
+
+  --sl-input-focus-ring-color: hsl(198.6 88.7% 48.4% / 40%);
+  --sl-input-focus-ring-offset: 0;
+
+  --sl-input-filled-background-color: var(--sl-color-neutral-100);
+  --sl-input-filled-background-color-hover: var(--sl-color-neutral-100);
+  --sl-input-filled-background-color-focus: var(--sl-color-neutral-100);
+  --sl-input-filled-background-color-disabled: var(--sl-color-neutral-100);
+  --sl-input-filled-color: var(--sl-color-neutral-800);
+  --sl-input-filled-color-hover: var(--sl-color-neutral-800);
+  --sl-input-filled-color-focus: var(--sl-color-neutral-700);
+  --sl-input-filled-color-disabled: var(--sl-color-neutral-800);
+
+  --sl-input-label-font-size-small: var(--sl-font-size-small);
+  --sl-input-label-font-size-medium: var(--sl-font-size-medium);
+  --sl-input-label-font-size-large: var(--sl-font-size-large);
+  --sl-input-label-color: inherit;
+
+  --sl-input-help-text-font-size-small: var(--sl-font-size-x-small);
+  --sl-input-help-text-font-size-medium: var(--sl-font-size-small);
+  --sl-input-help-text-font-size-large: var(--sl-font-size-medium);
+  --sl-input-help-text-color: var(--sl-color-neutral-500);
+
+  --sl-toggle-size-small: 0.875rem;
+  --sl-toggle-size-medium: 1.125rem;
+  --sl-toggle-size-large: 1.375rem;
+
+  --sl-overlay-background-color: hsl(240 3.8% 46.1% / 33%);
+
+  --sl-panel-background-color: var(--sl-color-neutral-0);
+  --sl-panel-border-color: var(--sl-color-neutral-200);
+  --sl-panel-border-width: 1px;
+
+  --sl-tooltip-border-radius: var(--sl-border-radius-medium);
+  --sl-tooltip-background-color: var(--sl-color-neutral-800);
+  --sl-tooltip-color: var(--sl-color-neutral-0);
+  --sl-tooltip-font-family: var(--sl-font-sans);
+  --sl-tooltip-font-weight: var(--sl-font-weight-normal);
+  --sl-tooltip-font-size: var(--sl-font-size-small);
+  --sl-tooltip-line-height: var(--sl-line-height-dense);
+  --sl-tooltip-padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-small);
+  --sl-tooltip-arrow-size: 6px;
+
+  --sl-z-index-drawer: 700;
+  --sl-z-index-dialog: 800;
+  --sl-z-index-dropdown: 900;
+  --sl-z-index-toast: 950;
+  --sl-z-index-tooltip: 1000;
+}
+
+@supports (scrollbar-gutter: stable) {
+  .sl-scroll-lock {
+    scrollbar-gutter: var(--sl-scroll-lock-gutter) !important;
+  }
+
+  .sl-scroll-lock body {
+    overflow: hidden !important;
+  }
+}
+
+@supports not (scrollbar-gutter: stable) {
+  .sl-scroll-lock body {
+    padding-right: var(--sl-scroll-lock-size) !important;
+    overflow: hidden !important;
+  }
+}
+
+.sl-toast-stack {
+  position: fixed;
+  top: 0;
+  inset-inline-end: 0;
+  z-index: var(--sl-z-index-toast);
+  width: 28rem;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.sl-toast-stack sl-alert {
+  margin: var(--sl-spacing-medium);
+}
+
+.sl-toast-stack sl-alert::part(base) {
+  box-shadow: var(--sl-shadow-large);
+}
+
+:root{color-scheme:light;--ink:#202334;--muted:#7b8092;--purple:#6259d9;--sl-color-primary-600:#6259d9;--sl-color-primary-500:#746ce5;--sl-color-primary-700:#5148bf;--sl-font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--sl-input-border-radius-medium:12px;--sl-panel-border-radius:20px}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#f7f8fa;color:var(--ink);font:15px/1.6 var(--sl-font-sans);-webkit-font-smoothing:antialiased}.app-shell{max-width:1240px;margin:auto;padding:0 48px}header{height:100px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e9eaf0}.brand{display:flex;align-items:center;font-weight:750;font-size:25px;letter-spacing:-1px;text-decoration:none;color:var(--ink)}.brand-symbol{display:grid;place-items:center;width:34px;height:38px;background:var(--purple);color:#fff;border-radius:12px 12px 12px 3px;font-size:30px;line-height:1;margin-right:10px}.brand-dot{color:var(--purple)}.header-right{display:flex;gap:20px;align-items:center}.header-right>span{font-size:12px;color:var(--muted)}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:40px 0 26px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:#989aab;margin:0 0 8px}h1{font-size:30px;letter-spacing:-1.2px;line-height:1.4;margin:0}h2{font-size:17px;letter-spacing:-.5px;margin:0}.control-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}sl-radio-group::part(form-control-input){display:flex}sl-radio-button::part(button){border:0;background:#edeef3;border-radius:10px;min-height:38px;font-size:13px;color:#777b8d;padding:0 16px}sl-radio-button[checked]::part(button){background:#fff;color:var(--purple);box-shadow:0 2px 6px #2222380c}sl-radio-group{padding:4px;border-radius:14px;background:#edeef3}sl-radio-button::part(button--checked){background:white;color:var(--purple)}sl-button::part(base){font-weight:600;letter-spacing:-.2px}sl-button[variant=primary]::part(base){box-shadow:0 5px 14px #6259d920}.range-trigger{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:#808494;font:12px var(--sl-font-sans);cursor:pointer;padding:10px 0}.workspace{display:grid;grid-template-columns:1fr 1.06fr;gap:28px;align-items:start}.rhythm-panel{padding:32px 30px 0;min-width:0}.section-label{display:flex;align-items:center;gap:10px;font-size:14px;color:#606577}.icon-tile{display:grid;place-items:center;background:#eeecfd;color:var(--purple);width:36px;height:36px;border-radius:12px}.hero-number{font-size:100px;line-height:1.1;font-weight:650;letter-spacing:-6px;margin:22px 0 16px;font-variant-numeric:tabular-nums}.hero-number span{font-size:21px;color:#9194a3;font-weight:400;letter-spacing:-.6px;margin-left:8px}#summary{font-size:12px;color:#838797;margin:0}.divider{height:1px;background:#e5e6ee;margin:28px 0}.inline-stats{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:15px}.inline-stats>div{display:flex;flex-direction:column;gap:7px}.inline-stats span{font-size:12px;color:#9195a3}.inline-stats strong{font-size:28px;font-weight:600;letter-spacing:-1px;font-variant-numeric:tabular-nums}.consistency{display:flex;align-items:center;gap:20px;margin-top:28px;padding:22px;background:#eeedf9;border-radius:20px}.consistency h2{font-size:14px;color:#544d88}.consistency p{font-size:12px;color:#7a7596;margin:3px 0}.consistency div>span{font-size:11px;color:#9690ad}sl-progress-ring{--size:76px;--track-width:6px;--indicator-width:6px;--track-color:#dddaef;--indicator-color:var(--purple);flex-shrink:0}#ratio{font-size:18px;font-weight:650;color:#5b548d}.connection{margin-top:23px}#status{font-size:12px;color:#9296a2;margin:0}.connection-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.connection-actions sl-button::part(base){font-size:12px;padding:0;color:#78728f}#calendarLabel{font-size:12px;color:#858999}select{max-width:180px;border:0;background:#eaeaf1;border-radius:8px;padding:5px;color:#55596b}.calendar-panel{min-width:0;background:white;border:1px solid #eeeff5;border-radius:28px;padding:30px;box-shadow:0 12px 50px #27214e05}.calendar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.calendar-top .eyebrow{font-size:10px;margin-bottom:4px}.calendar-top sl-button::part(base){font-size:12px;background:#f8f8fc;border-color:#efeff6;color:#838297}.month-heading{font-size:20px;font-weight:650;letter-spacing:-.6px;margin-bottom:20px}.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px}.weekday{text-align:center;color:#adb0bd;font-size:11px;padding-bottom:9px}.day{border:0;aspect-ratio:1;background:none;color:#6e7284;display:grid;place-items:center;padding:0;cursor:pointer;font-size:14px;font-family:inherit;border-radius:16px;transition:transform .2s,background .2s}.day:hover{background:#f1effc;transform:translateY(-2px)}.day.hit{background:#e9e6fc;color:#665ac7;font-weight:650}.day.today{outline:1px solid #a49be9;outline-offset:-2px}.day.future{color:#cfd1db}.month-foot{font-size:12px;color:#969aaa;text-align:center;margin:22px 0 10px}.swipe-hint{display:flex;justify-content:center;align-items:center;gap:8px;font-size:11px;color:#b2b4bf;margin-top:12px}.calendar-bottom{display:flex;flex-direction:column;gap:12px;border-top:1px solid #f0f0f5;margin-top:23px;padding-top:18px;font-size:11px;color:#a0a4b2}.legend{display:flex;align-items:center;gap:7px}.legend i{width:8px;height:8px;background:#b4a9ef;border-radius:3px}swiper-container{display:block;overflow:hidden}swiper-slide{display:block}swiper-container:not(:defined){display:flex;overflow-x:auto;scroll-snap-type:x mandatory}swiper-container:not(:defined)>swiper-slide{flex:0 0 100%;scroll-snap-align:start}footer{display:flex;justify-content:space-between;gap:14px;font-size:11px;color:#a3a7b5;padding:32px 0}sl-drawer{--size:460px}sl-drawer[placement=bottom]{--size:auto}sl-drawer::part(panel){border-radius:24px 0 0 24px}sl-drawer[placement=bottom]::part(panel){border-radius:26px 26px 0 0;max-width:600px;margin:auto;max-height:90vh}sl-drawer::part(title){font-size:19px;font-weight:650}sl-drawer::part(overlay){backdrop-filter:blur(5px)}sl-drawer:not(:defined){display:none}.drawer-intro{color:#7d8293;font-size:14px}.date-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}.date-fields label{font-size:13px;color:#777b8e;display:flex;flex-direction:column;gap:9px}input{font:14px var(--sl-font-sans);border:1px solid #dddfea;border-radius:13px;padding:13px;background:#fafafe;color:#3c4055;min-width:0;width:100%}.drawer-note{font-size:12px;color:#989dac}#rangeError{font-size:13px;color:#b14455}#settings p,#settings li{font-size:13px;color:#7c8192}#settings li{margin:12px 0}#settings label{font-size:13px;color:#656c7f}#clientId{margin:10px 0 16px}code{overflow-wrap:anywhere}a{color:var(--purple)}:focus-visible{outline:2px solid #8e82df;outline-offset:3px}
+@media(max-width:760px){.app-shell{padding:0 22px}header{height:76px}.header-right>span{display:none}.page-heading{margin:28px 0 24px;align-items:center}h1{font-size:25px}.page-heading sl-button::part(base){font-size:12px;padding:0 12px}.page-heading sl-icon{display:none}.control-bar{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:8px}sl-radio-group{width:100%}sl-radio-group::part(button-group__base){width:100%}sl-radio-button{flex:1}sl-radio-button::part(button){padding:0 13px;font-size:12px}.range-trigger{justify-content:center;font-size:11px;padding:5px 0}.workspace{grid-template-columns:1fr;gap:24px}.rhythm-panel{padding:20px 6px 0}.section-label{font-size:13px}.hero-number{font-size:88px;margin:18px 0 14px}.hero-number span{font-size:20px}.divider{margin:24px 0}.inline-stats strong{font-size:27px}.inline-stats span{font-size:11px}.consistency{margin-top:22px;padding:18px 20px;gap:18px}.connection{margin-top:18px}.calendar-panel{border-radius:25px;padding:26px 22px}.calendar-top{margin-bottom:25px}.days{gap:8px}.day{border-radius:14px;min-height:36px}.month-heading{font-size:20px}footer{flex-direction:column;gap:4px;padding:24px 4px;font-size:10px}.date-fields{gap:10px}.date-fields input{padding:12px 8px}sl-drawer::part(panel){border-radius:24px 0 0 24px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}swiper-container{--swiper-wrapper-transition-timing-function:step-end}}
+</style></head><body><div class="app-shell"><header><a class="brand" href="#" aria-label="Rhythm 홈"><span class="brand-symbol">r</span>rhythm<span class="brand-dot">.</span></a><div class="header-right"><span id="sessionNote">개인 운동 대시보드</span><sl-button id="openSettings" circle aria-label="연결 설정"><sl-icon name="sliders" label="설정"></sl-icon></sl-button></div></header><main>
+<div class="page-heading"><div><p class="eyebrow">MY ACTIVITY</p><h1>나만의 페이스로.</h1></div><sl-button id="connect" variant="primary" pill><sl-icon slot="prefix" name="google"></sl-icon>캘린더 연결</sl-button></div>
+<div class="control-bar"><sl-radio-group id="periodTabs" value="all" aria-label="통계 기간"><sl-radio-button value="all">전체</sl-radio-button><sl-radio-button value="30">30일</sl-radio-button><sl-radio-button value="90">90일</sl-radio-button><sl-radio-button value="custom">직접 설정</sl-radio-button></sl-radio-group><button id="rangeButton" class="range-trigger"><sl-icon name="calendar4"></sl-icon><span id="rangeLabel">기간 설정</span><sl-icon name="chevron-down"></sl-icon></button></div>
+<div class="workspace"><section class="rhythm-panel"><div class="section-label"><span class="icon-tile"><sl-icon name="activity"></sl-icon></span>나의 운동 리듬</div><div class="hero-number" id="average">— <span>일에 한 번</span></div><p id="summary">캘린더를 연결해 기록을 확인하세요.</p><div class="divider"></div><div class="inline-stats"><div><span>운동한 날</span><strong class="stat-value" id="count">—</strong></div><div><span>주당 평균</span><strong class="stat-value" id="weekly">—</strong></div><div><span>마지막 운동 이후</span><strong class="stat-value" id="since">—</strong></div></div><div class="consistency"><sl-progress-ring id="ring" value="0"><span id="ratio">—</span></sl-progress-ring><div><h2>작은 기록이 쌓이는 중</h2><p id="ratioDescription">나의 기록을 연결해 보세요.</p><span>선택한 기간의 운동 비율</span></div></div><div class="connection"><p id="status" role="status" aria-live="polite">Google 캘린더를 연결하면 시작됩니다.</p><div class="connection-actions"><sl-button id="demo" size="small" variant="text">예시 둘러보기</sl-button><sl-button id="refresh" size="small" variant="text" hidden><sl-icon slot="prefix" name="arrow-clockwise"></sl-icon>동기화</sl-button><sl-button id="logout" size="small" variant="text" hidden>연결 해제</sl-button><label id="calendarLabel" hidden>캘린더 <select id="calendar"></select></label></div></div></section>
+<section class="calendar-panel" aria-label="월별 운동 캘린더"><div class="calendar-top"><div><p class="eyebrow">YOUR DAYS</p><h2>움직인 날의 기록</h2></div><sl-button size="small" pill id="goToday">이번 달</sl-button></div><swiper-container id="monthSwiper" init="false" aria-label="월별 캘린더, 좌우로 스와이프하거나 방향키로 이동" tabindex="0"></swiper-container><div class="swipe-hint"><sl-icon name="arrow-left-right"></sl-icon><span id="monthRange">좌우로 밀어서 월 이동</span></div><div class="calendar-bottom"><span class="legend"><i></i>운동한 날</span><span id="dayDetail" aria-live="polite">날짜를 누르면 기록을 확인할 수 있어요.</span></div></section></div>
+<footer><span>꾸준함을 기록하는 나만의 공간.</span><span>한국 시간 기준 · 같은 날의 운동은 1일로 집계</span></footer></main></div>
+<sl-drawer id="rangeDrawer" label="나의 기록 기간" placement="bottom"><p class="drawer-intro">시작일을 한 번 정하면, 다음에도 기억할게요.</p><div class="date-fields"><label>시작일<input type="date" id="start"></label><label>종료일<input type="date" id="end"></label></div><p class="drawer-note">종료일을 오늘로 설정하면 매일 자동으로 늘어납니다.</p><p id="rangeError" role="alert"></p><sl-button id="applyRange" slot="footer" variant="primary" pill>이 기간으로 보기</sl-button></sl-drawer>
+<sl-drawer id="settings" label="연결 설정" placement="end"><p>처음 한 번, 개인 Google Cloud 프로젝트의 웹 애플리케이션 OAuth 클라이언트 ID를 입력하세요. 클라이언트 시크릿은 필요하지 않습니다.</p><label for="clientId">OAuth 클라이언트 ID</label><input id="clientId" placeholder="…apps.googleusercontent.com" autocomplete="off"><sl-button id="save" variant="primary" pill>설정 저장</sl-button><ol><li><a href="https://console.cloud.google.com/apis/library/calendar-json.googleapis.com" target="_blank" rel="noopener">Google Cloud</a>에서 개인 프로젝트를 만들고 Google Calendar API를 활성화합니다.</li><li>Google Auth Platform에서 대상을 외부 / 테스트로 설정하고, 테스트 사용자에 개인 Google 이메일을 추가합니다.</li><li>클라이언트 → 웹 애플리케이션을 만들고 승인된 JavaScript 원본에 <code id="origin"></code>를 추가합니다.</li><li>발급된 클라이언트 ID를 위에 저장한 뒤 Google 캘린더 연결을 누릅니다.</li></ol><p>클라이언트 ID·선택한 캘린더·기간은 이 브라우저에 자동 저장합니다. 로그인은 현재 탭에서 새로고침해도 만료 전까지 유지합니다. 인증이 만료되거나 탭을 닫으면 다시 연결해 주세요. 운동 기록과 인증 토큰은 GitHub에 업로드하지 않습니다.</p><sl-button id="closeSettings" slot="footer" pill>닫기</sl-button></sl-drawer><select id="period" hidden><option value="all">전체</option><option value="30">30</option><option value="90">90</option><option value="custom">직접</option></select><script>
 'use strict';
 const $=id=>document.getElementById(id), DAY=86400000;
 const day=s=>Math.floor(Date.parse(s+'T00:00:00Z')/DAY), date=n=>new Date(n*DAY).toISOString().slice(0,10);
 const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-let records=[],token='',expires=0,isDemo=false,monthOffset=0,generation=0;
+let calendarKey='';let records=[],token='',expires=0,isDemo=false,monthOffset=0,generation=0;
 function stats(dates,start,end){const days=day(end)-day(start)+1;const n=new Set(dates.filter(d=>d>=start&&d<=end)).size;return {days,n,average:n?days/n:null,weekly:days>0?n/days*7:0};}
 function readPref(k,fallback=''){try{return localStorage.getItem(k)||fallback;}catch{return fallback;}}
 function writePref(k,v){try{localStorage.setItem(k,v);}catch{message('브라우저 저장이 제한되어 설정을 기억할 수 없습니다.');}}
@@ -30,19 +507,43 @@ function message(s){$('status').textContent=s;}
 function render(){const t=today();$('end').max=t;$('start').max=t;let a=$('start').value,b=$('end').value;const valid=a&&b&&a<=b&&b<=t;const s=valid?stats(records,a,b):null;
 $('average').innerHTML=(s&&s.n?s.average.toFixed(1):'—')+' <span>일에 한 번</span>';
 $('summary').textContent=s?`${a} ~ ${b} · ${s.days}일 중 ${s.n}일 운동${isDemo?' · 예시 데이터':''}`:'오늘 이전의 올바른 시작일과 종료일을 선택하세요.';
-const ratio=s&&s.days?Math.round(s.n/s.days*100):0;$('ring').style.setProperty('--sweep',ratio+'%');$('ratio').textContent=records.length?ratio+'%':'—';$('ring').setAttribute('aria-label','기간 중 운동한 날 '+ratio+'%');$('ratioDescription').textContent=s&&records.length?s.days+'일의 시간, '+s.n+'일의 운동.':'나의 기록을 연결해 보세요.';
+const ratio=s&&s.days?Math.round(s.n/s.days*100):0;$('ring').value=ratio;$('ratio').textContent=records.length?ratio+'%':'—';$('ring').setAttribute('aria-label','기간 중 운동한 날 '+ratio+'%');$('ratioDescription').textContent=s&&records.length?s.days+'일의 시간, '+s.n+'일의 운동.':'나의 기록을 연결해 보세요.';
 $('count').textContent=s?s.n+'일':'—';$('weekly').textContent=s?s.weekly.toFixed(1)+'일':'—';const last=records.filter(d=>d<=t).sort().at(-1);$('since').textContent=last?(day(t)-day(last))+'일':'—';
-const base=new Date((valid?b:t)+'T00:00:00Z');base.setUTCDate(1);base.setUTCMonth(base.getUTCMonth()+monthOffset-2);$('months').replaceChildren();const set=new Set(records);
-for(let k=0;k<3;k++){const m=new Date(base);m.setUTCMonth(m.getUTCMonth()+k);const section=document.createElement('div'),title=document.createElement('div');title.className='monthTitle';title.textContent=`${m.getUTCFullYear()}년 ${m.getUTCMonth()+1}월`;section.append(title);const g=document.createElement('div');g.className='days';for(const w of '일월화수목금토'){const el=document.createElement('div');el.className='weekday';el.textContent=w;g.append(el);}for(let i=0;i<m.getUTCDay();i++)g.append(document.createElement('div'));const end=new Date(Date.UTC(m.getUTCFullYear(),m.getUTCMonth()+1,0)).getUTCDate();for(let i=1;i<=end;i++){const d=date(Date.UTC(m.getUTCFullYear(),m.getUTCMonth(),i)/DAY),el=document.createElement('div');el.className='day'+(set.has(d)?' hit':'')+(d>t?' future':'')+(d===t?' today':'');el.textContent=i;el.title=d+(set.has(d)?' 운동':'');g.append(el);}section.append(g);$('months').append(section);}}
+renderCalendar();
+$('rangeLabel').textContent=valid?a.replaceAll('-','.')+' — '+b.replaceAll('-','.'):'기간 설정';
+$('periodTabs').value=$('period').value;
+$('sessionNote').textContent=isDemo?'예시 기록':token?'Google Calendar 연결됨':'개인 운동 대시보드';
+}
+
+function renderCalendar(){
+ const t=today(), key=records.join(',')+t;
+ if(key===calendarKey)return;calendarKey=key;
+ const end=new Date(t+'T00:00:00Z');end.setUTCDate(1);
+ const first=new Date((records[0]||date(day(t)-365))+'T00:00:00Z');first.setUTCDate(1);first.setUTCMonth(first.getUTCMonth()-1);
+ const months=[];for(let d=new Date(first);d<=end;d.setUTCMonth(d.getUTCMonth()+1))months.push(new Date(d));
+ const set=new Set(records),host=$('monthSwiper');host.replaceChildren();
+ months.forEach(m=>{const slide=document.createElement('swiper-slide');const title=document.createElement('div');title.className='month-heading';const label=m.getUTCFullYear()+'년 '+(m.getUTCMonth()+1)+'월';title.textContent=label;slide.append(title);const grid=document.createElement('div');grid.className='days';for(const w of '월화수목금토일'){const e=document.createElement('span');e.className='weekday';e.textContent=w;grid.append(e);}for(let i=0;i<(m.getUTCDay()+6)%7;i++)grid.append(document.createElement('span'));const total=new Date(Date.UTC(m.getUTCFullYear(),m.getUTCMonth()+1,0)).getUTCDate();let count=0;for(let i=1;i<=total;i++){const d=date(Date.UTC(m.getUTCFullYear(),m.getUTCMonth(),i)/DAY);const e=document.createElement('button');e.type='button';e.className='day'+(set.has(d)?' hit':'')+(d===t?' today':'')+(d>t?' future':'');e.textContent=i;e.setAttribute('aria-label',d+(set.has(d)?' 운동 기록 있음':' 운동 기록 없음'));e.onclick=()=>{$('dayDetail').textContent=d.replaceAll('-','.')+(set.has(d)?' · 운동한 날':' · 운동 기록 없음');};grid.append(e);if(set.has(d))count++;}slide.append(grid);const foot=document.createElement('div');foot.className='month-foot';foot.textContent=count+'일 운동 · '+(m.getUTCMonth()+1)+'월의 기록';slide.append(foot);host.append(slide);});
+ if(host.swiper){host.swiper.update();host.swiper.slideTo(months.length-1,0);host.swiper.updateAutoHeight(0);}else{host.setAttribute('initial-slide',String(months.length-1));}
+ $('monthRange').textContent='좌우로 밀어서 월 이동';
+}
+
 function range(){const t=today();$('end').value=t;const p=$('period').value;if(p==='custom'){render();return;}$('start').value=p==='all'?(records[0]||t):date(day(t)-Number(p)+1);monthOffset=0;render();}
 async function api(path,params={}){if(!token||Date.now()>=expires)throw Error('연결이 만료되었습니다. Google 캘린더를 다시 연결하세요.');const r=await fetch('https://www.googleapis.com/calendar/v3/'+path+'?'+new URLSearchParams(params),{headers:{Authorization:'Bearer '+token}});if(!r.ok)throw Error(r.status===401?'연결이 만료되었습니다. 다시 연결하세요.':`캘린더를 불러오지 못했습니다 (${r.status}). API 활성화와 읽기 권한을 확인하세요.`);return r.json();}
 async function pages(path,params){let result=[],pageToken;do{const data=await api(path,{...params,...(pageToken?{pageToken}:{})});result.push(...(data.items||[]));pageToken=data.nextPageToken;}while(pageToken);return result;}
-async function sync(){const gen=++generation;records=[];render();$('refresh').disabled=true;message('운동 기록을 불러오는 중…');try{const id=$('calendar').value;if(!id)throw Error('운동 캘린더를 선택하세요.');const events=await pages('calendars/'+encodeURIComponent(id)+'/events',{singleEvents:'true',showDeleted:'false',maxResults:'2500',timeMax:new Date().toISOString(),fields:'nextPageToken,items(status,start)'});if(gen!==generation)return;records=[...new Set(events.filter(e=>e.status!=='cancelled').map(e=>e.start.date||new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(e.start.dateTime))).filter(d=>d<=today()))].sort();isDemo=false;restoreRange();writePref('workout-calendar',$('calendar').value);message(`동기화 완료 · ${new Date().toLocaleTimeString('ko-KR')} · 운동한 날 ${records.length}일`);}catch(e){if(gen===generation)message(e.message);}finally{$('refresh').disabled=false;}}
+async function sync(){const gen=++generation;records=[];render();$('refresh').disabled=true;message('운동 기록을 불러오는 중…');try{const id=$('calendar').value;if(!id)throw Error('운동 캘린더를 선택하세요.');const events=await pages('calendars/'+encodeURIComponent(id)+'/events',{singleEvents:'true',showDeleted:'false',maxResults:'2500',timeMax:new Date().toISOString(),fields:'nextPageToken,items(status,start)'});if(gen!==generation)return;records=[...new Set(events.filter(e=>e.status!=='cancelled').map(e=>e.start.date||new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(e.start.dateTime))).filter(d=>d<=today()))].sort();isDemo=false;restoreRange();animateStats();writePref('workout-calendar',$('calendar').value);message(`동기화 완료 · ${new Date().toLocaleTimeString('ko-KR')} · 운동한 날 ${records.length}일`);}catch(e){if(gen===generation)message(e.message);}finally{$('refresh').disabled=false;}}
 async function loadCalendars(){try{const calendars=await pages('users/me/calendarList',{maxResults:'250',fields:'nextPageToken,items(id,summary)'});$('calendar').replaceChildren();for(const c of calendars){const o=document.createElement('option');o.value=c.id;o.textContent=c.summary;$('calendar').append(o);}const exercise=calendars.find(c=>c.id===readPref('workout-calendar'))||calendars.find(c=>c.summary==='운동');$('calendar').value=exercise?.id||'';$('calendarLabel').hidden=false;$('refresh').hidden=false;$('logout').hidden=false;if(exercise)await sync();else{records=[];render();message('운동 기록이 있는 캘린더를 선택하세요.');}}catch(e){message(e.message);}}
-$('connect').onclick=()=>{const client=$('clientId').value.trim();if(!client.endsWith('.apps.googleusercontent.com')){$('settings').open=true;$('clientId').focus();message('최초 연결을 위해 아래 Google 연결 설정을 완료해 주세요.');return;}if(!window.google?.accounts?.oauth2){message('Google 연결 모듈을 불러오지 못했습니다. 네트워크를 확인하고 다시 시도하세요.');return;}writePref('workout-client-id',client);google.accounts.oauth2.initTokenClient({client_id:client,scope:'https://www.googleapis.com/auth/calendar.calendarlist.readonly https://www.googleapis.com/auth/calendar.events.readonly',callback:async r=>{if(r.error){message('Google 연결이 취소되었거나 권한이 허용되지 않았습니다.');return;}token=r.access_token;expires=Date.now()+Number(r.expires_in)*1000;try{sessionStorage.setItem('workout-session',JSON.stringify({token,expires,client}));}catch{}await loadCalendars();},error_callback:()=>message('로그인 창이 닫혔습니다. 다시 연결해 주세요.')}).requestAccessToken();};
+$('connect').onclick=()=>{const client=$('clientId').value.trim();if(!client.endsWith('.apps.googleusercontent.com')){$('settings').show();$('clientId').focus();message('최초 연결을 위해 아래 Google 연결 설정을 완료해 주세요.');return;}if(!window.google?.accounts?.oauth2){message('Google 연결 모듈을 불러오지 못했습니다. 네트워크를 확인하고 다시 시도하세요.');return;}writePref('workout-client-id',client);google.accounts.oauth2.initTokenClient({client_id:client,scope:'https://www.googleapis.com/auth/calendar.calendarlist.readonly https://www.googleapis.com/auth/calendar.events.readonly',callback:async r=>{if(r.error){message('Google 연결이 취소되었거나 권한이 허용되지 않았습니다.');return;}token=r.access_token;expires=Date.now()+Number(r.expires_in)*1000;try{sessionStorage.setItem('workout-session',JSON.stringify({token,expires,client}));}catch{}await loadCalendars();},error_callback:()=>message('로그인 창이 닫혔습니다. 다시 연결해 주세요.')}).requestAccessToken();};
 $('save').onclick=()=>{try{localStorage.setItem('workout-client-id',$('clientId').value.trim());message('연결 설정을 저장했습니다. Google 캘린더 연결을 눌러 주세요.');}catch{message('브라우저 저장이 제한되어 있습니다. 현재 탭에서는 바로 연결할 수 있습니다.');}};
 $('logout').onclick=()=>{generation++;if(token&&window.google)google.accounts.oauth2.revoke(token,()=>{});try{sessionStorage.removeItem('workout-session');}catch{}token='';records=[];isDemo=false;$('calendar').replaceChildren();$('calendarLabel').hidden=true;$('refresh').hidden=true;$('logout').hidden=true;range();message('연결을 해제하고 현재 탭의 운동 기록을 지웠습니다.');};
-$('demo').onclick=()=>{if(token){message('예시를 보려면 먼저 연결을 해제하세요.');return;}isDemo=true;records=Array.from({length:28},(_,i)=>date(day(today())-i*3)).sort();range();message('예시 데이터입니다. 실제 개인 운동 기록이 아닙니다.');};
-$('calendar').onchange=sync;$('refresh').onclick=sync;$('period').onchange=()=>{if($('period').value!=='custom')range();saveRange();};for(const id of ['start','end'])$(id).onchange=()=>{$('period').value='custom';monthOffset=0;render();saveRange();};$('prev').onclick=()=>{monthOffset-=3;render();};$('next').onclick=()=>{monthOffset=Math.min(0,monthOffset+3);render();};$('origin').textContent=location.origin;try{$('clientId').value=localStorage.getItem('workout-client-id')||'';}catch{}restoreRange();$('openSettings').onclick=()=>{$('settings').open=!$('settings').open;if($('settings').open)$('settings').scrollIntoView({behavior:'smooth'});};try{const saved=JSON.parse(sessionStorage.getItem('workout-session')||'null');if(saved&&saved.client===$('clientId').value&&typeof saved.token==='string'&&saved.expires>Date.now()+30000){token=saved.token;expires=saved.expires;loadCalendars();}else{sessionStorage.removeItem('workout-session');if($('clientId').value)message('설정을 기억하고 있어요. Google 캘린더 연결을 누르면 기록을 불러옵니다.');}}catch{}
-</script></body></html>
+$('demo').onclick=()=>{if(token){message('예시를 보려면 먼저 연결을 해제하세요.');return;}isDemo=true;records=Array.from({length:28},(_,i)=>date(day(today())-i*3)).sort();range();animateStats();message('예시 데이터입니다. 실제 개인 운동 기록이 아닙니다.');};
+$('calendar').onchange=sync;$('refresh').onclick=sync;$('period').onchange=()=>{if($('period').value!=='custom')range();saveRange();};for(const id of ['start','end'])$(id).onchange=()=>{$('period').value='custom';monthOffset=0;render();saveRange();};$('origin').textContent=location.origin;try{$('clientId').value=localStorage.getItem('workout-client-id')||'';}catch{}restoreRange();$('openSettings').onclick=()=>$('settings').show();try{const saved=JSON.parse(sessionStorage.getItem('workout-session')||'null');if(saved&&saved.client===$('clientId').value&&typeof saved.token==='string'&&saved.expires>Date.now()+30000){token=saved.token;expires=saved.expires;loadCalendars();}else{sessionStorage.removeItem('workout-session');if($('clientId').value)message('설정을 기억하고 있어요. Google 캘린더 연결을 누르면 기록을 불러옵니다.');}}catch{}
 
+function animateStats(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(const el of document.querySelectorAll('.stat-value,#average'))el.animate([{transform:'translateY(9px)',opacity:.3},{transform:'translateY(0)',opacity:1}],{duration:420,easing:'cubic-bezier(.2,.8,.2,1)'});}
+$('periodTabs').addEventListener('sl-change',e=>{const value=e.target.value;$('period').value=value;if(value==='custom'){$('rangeDrawer').show();}else{range();saveRange();animateStats();}});
+$('rangeButton').onclick=()=>$('rangeDrawer').show();
+$('applyRange').onclick=()=>{if(!$('start').value||!$('end').value||$('start').value>$('end').value||$('end').value>today()){$('rangeError').textContent='오늘 이전의 올바른 시작일과 종료일을 선택해 주세요.';return;}$('period').value='custom';saveRange();render();$('rangeError').textContent='';$('rangeDrawer').hide();animateStats();};
+$('closeSettings').onclick=()=>$('settings').hide();
+$('goToday').onclick=()=>{const s=$('monthSwiper').swiper;if(s)s.slideTo(s.slides.length-1);};
+$('save').addEventListener('click',()=>{$('settings').hide();});
+customElements.whenDefined('swiper-container').then(()=>{const host=$('monthSwiper');Object.assign(host,{speed:matchMedia('(prefers-reduced-motion: reduce)').matches?0:450,autoHeight:true,grabCursor:true,keyboard:{enabled:true},a11y:{enabled:true},spaceBetween:32,slidesPerView:1,initialSlide:Math.max(0,host.children.length-1)});host.initialize();});
+</script></body></html>
