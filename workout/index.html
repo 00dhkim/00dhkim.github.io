@@ -489,10 +489,19 @@
 .settings-section{padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid #ececf3}.settings-section h2{margin-bottom:16px}.settings-section .control-bar{flex-direction:column;align-items:stretch;gap:12px;margin:0}.settings-section .range-trigger{justify-content:center}.settings-section .connection{margin-top:14px}.advanced summary{font-size:14px;cursor:pointer;color:#666c80}.workspace{margin-top:32px}.settings-section .date-fields{margin:18px 0}.settings-section .drawer-intro{font-size:13px}
 @media(max-width:760px){.app-shell{padding:0 18px}header{height:62px}.brand{font-size:22px}.brand-symbol{width:29px;height:32px;font-size:26px}.workspace{margin-top:12px;gap:14px}.rhythm-panel{padding:4px 5px 0;position:relative}.section-label{font-size:12px;gap:7px}.icon-tile{width:27px;height:27px;border-radius:9px}.hero-number{font-size:65px;letter-spacing:-4px;line-height:1;margin:10px 0 8px;max-width:calc(100% - 70px)}.hero-number span{font-size:16px;letter-spacing:-.6px;margin-left:3px}#summary{font-size:11px;line-height:1.6}.divider{margin:12px 0}.inline-stats{gap:12px}.inline-stats>div{gap:2px}.inline-stats strong{font-size:23px;line-height:1.4}.inline-stats span{font-size:11px}.consistency{position:absolute;right:4px;top:33px;padding:0;margin:0;background:transparent}.consistency>div{display:none}sl-progress-ring{--size:58px;--track-width:5px;--indicator-width:5px}#ratio{font-size:14px}.calendar-panel{padding:16px 18px;border-radius:21px}.calendar-top{margin-bottom:10px}.calendar-top .eyebrow{display:none}.calendar-top h2{font-size:15px}.month-heading{font-size:16px;margin-bottom:9px}.days{gap:4px}.weekday{padding-bottom:4px}.day{aspect-ratio:auto;height:32px;min-height:32px;border-radius:11px;font-size:13px}.month-foot{margin:8px 0 3px;font-size:11px}.swipe-hint{margin-top:6px;font-size:10px}.calendar-bottom{margin-top:10px;padding-top:10px;gap:6px;font-size:10px}.calendar-bottom .legend{display:none}footer{padding:12px 4px;font-size:10px}footer>span:first-child{display:none}.settings-section .connection{margin-top:14px}.settings-section .control-bar{margin:0}.settings-section .hero-number{max-width:none}}
 .ratio-figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0}.ratio-figure figcaption{font-size:11px;line-height:1.4;text-align:center;color:#77718e}.header-right{gap:12px}#refresh::part(base){font-size:12px;color:var(--purple)}@media(max-width:760px){.header-right{gap:8px}.consistency{top:19px;right:0}.ratio-figure{gap:5px}.ratio-figure figcaption{font-size:10px}.hero-number{max-width:calc(100% - 80px)}}
+
+.rhythm-notice{display:flex;align-items:center;gap:12px;padding:11px 16px;margin-top:20px;border-radius:14px;font-size:13px;line-height:1.5;background:#eaf6ef;color:#287448}
+.rhythm-level{font-weight:750;flex-shrink:0}
+.rhythm-notice[data-level=ready]{background:#e8f2ff;color:#265d9d}
+.rhythm-notice[data-level=late]{background:#fff1d8;color:#915c04;box-shadow:inset 3px 0 #ecad31}
+.rhythm-notice[data-level=urgent]{background:#fff0f0;color:#b32636;box-shadow:inset 4px 0 #de3549;border:1px solid #f6c8ce}
+#since[data-level=ready]{color:#265d9d}#since[data-level=late]{color:#ad6800}#since[data-level=urgent]{color:#cd263f}
+.rhythm-notice:not([hidden])+.workspace{margin-top:18px}
+@media(max-width:760px){.rhythm-notice{margin-top:9px;padding:8px 11px;gap:2px;align-items:flex-start;flex-direction:column;font-size:11px;border-radius:11px}.rhythm-notice:not([hidden])+.workspace{margin-top:9px}.rhythm-level{font-size:12px}}
 </style></head><body><div class="app-shell"><header><a class="brand" href="#" aria-label="Rhythm 홈"><span class="brand-symbol">r</span>rhythm<span class="brand-dot">.</span></a><div class="header-right"><sl-button id="refresh" size="small" variant="text"><sl-icon slot="prefix" name="arrow-clockwise"></sl-icon>동기화</sl-button><span id="sessionNote">개인 운동 대시보드</span><sl-button id="openSettings" circle aria-label="연결 설정"><sl-icon name="sliders" label="설정"></sl-icon></sl-button></div></header><main>
 
 
-<div class="workspace"><section class="rhythm-panel"><div class="section-label"><span class="icon-tile"><sl-icon name="activity"></sl-icon></span>나의 운동 리듬</div><div class="hero-number" id="average">— <span>일에 한 번</span></div><p id="summary">캘린더를 연결해 기록을 확인하세요.</p><div class="divider"></div><div class="inline-stats"><div><span>운동한 날</span><strong class="stat-value" id="count">—</strong></div><div><span>주당 평균</span><strong class="stat-value" id="weekly">—</strong></div><div><span>마지막 운동 이후</span><strong class="stat-value" id="since">—</strong></div></div><div class="consistency"><figure class="ratio-figure"><sl-progress-ring id="ring" value="0"><span id="ratio">—</span></sl-progress-ring><figcaption>기간 중<br>운동한 날 비율</figcaption></figure><div><h2>작은 기록이 쌓이는 중</h2><p id="ratioDescription">나의 기록을 연결해 보세요.</p><span>선택한 기간의 운동 비율</span></div></div></section>
+<div id="rhythmNotice" class="rhythm-notice" role="status" aria-live="polite" hidden><span id="rhythmLevel" class="rhythm-level"></span><span id="rhythmMessage"></span></div><div class="workspace"><section class="rhythm-panel"><div class="section-label"><span class="icon-tile"><sl-icon name="activity"></sl-icon></span>나의 운동 리듬</div><div class="hero-number" id="average">— <span>일에 한 번</span></div><p id="summary">캘린더를 연결해 기록을 확인하세요.</p><div class="divider"></div><div class="inline-stats"><div><span>운동한 날</span><strong class="stat-value" id="count">—</strong></div><div><span>주당 평균</span><strong class="stat-value" id="weekly">—</strong></div><div><span>마지막 운동 이후</span><strong class="stat-value" id="since">—</strong></div></div><div class="consistency"><figure class="ratio-figure"><sl-progress-ring id="ring" value="0"><span id="ratio">—</span></sl-progress-ring><figcaption>기간 중<br>운동한 날 비율</figcaption></figure><div><h2>작은 기록이 쌓이는 중</h2><p id="ratioDescription">나의 기록을 연결해 보세요.</p><span>선택한 기간의 운동 비율</span></div></div></section>
 <section class="calendar-panel" aria-label="월별 운동 캘린더"><div class="calendar-top"><div><p class="eyebrow">YOUR DAYS</p><h2>움직인 날의 기록</h2></div><sl-button size="small" pill id="goToday">이번 달</sl-button></div><swiper-container id="monthSwiper" init="false" aria-label="월별 캘린더, 좌우로 스와이프하거나 방향키로 이동" tabindex="0"></swiper-container><div class="swipe-hint"><sl-icon name="arrow-left-right"></sl-icon><span id="monthRange">좌우로 밀어서 월 이동</span></div><div class="calendar-bottom"><span class="legend"><i></i>운동한 날</span><span id="dayDetail" aria-live="polite">날짜를 누르면 기록을 확인할 수 있어요.</span></div></section></div>
 <footer><span>꾸준함을 기록하는 나만의 공간.</span><span>한국 시간 기준 · 같은 날의 운동은 1일로 집계</span></footer></main></div>
 
@@ -510,11 +519,33 @@ function openCustomRange(){let saved;try{saved=JSON.parse(readPref('workout-cust
 
 function restoreRange(){try{const p=JSON.parse(readPref('workout-range','null'));if(p&&['all','30','90','custom'].includes(p.period)){$('period').value=p.period;if(p.period==='custom'&&/^\d{4}-\d{2}-\d{2}$/.test(p.start)&&/^\d{4}-\d{2}-\d{2}$/.test(p.end)){$('start').value=p.start;$('end').value=p.followToday?today():p.end;render();return;}}}catch{}if($('period').value==='custom')$('period').value='all';range();}
 function message(s){$('status').textContent=s;}
+
+function urgencyFor(days){
+ if(days===null)return {level:'none',label:'',message:''};
+ if(days===0)return {level:'steady',label:'완료',message:'오늘 운동했어요. 좋은 흐름이에요.'};
+ if(days===1)return {level:'steady',label:'좋은 흐름',message:'어제 운동했어요. 리듬을 이어가요.'};
+ if(days===2)return {level:'ready',label:'운동하기 좋은 날',message:'마지막 운동 후 2일 · 오늘 움직여 볼까요?'};
+ if(days===3)return {level:'late',label:'살짝 미뤄짐',message:'벌써 3일째예요. 오늘은 운동을 챙겨요.'};
+ return {level:'urgent',label:'심각 · '+days+'일째',message:'운동 간격이 많이 벌어졌어요. 오늘 다시 시작해요.'};
+}
+function updateUrgency(days){
+ const state=urgencyFor(days);const notice=$('rhythmNotice');
+ const changed=notice.dataset.level!==state.level;
+ notice.dataset.level=state.level;notice.hidden=days===null;
+ $('rhythmLevel').textContent=state.label;$('rhythmMessage').textContent=state.message;
+ $('since').dataset.level=state.level;
+ if(changed&&state.level==='urgent'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ notice.animate([{transform:'translateX(0)'},{transform:'translateX(-3px)'},{transform:'translateX(3px)'},{transform:'translateX(0)'}],{duration:400,iterations:1});
+ }
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+setInterval(()=>{if(!document.hidden)render();},60000);
+
 function render(){const t=today();$('end').max=t;$('start').max=t;let a=$('start').value,b=$('end').value;const valid=a&&b&&a<=b&&b<=t;const s=valid?stats(records,a,b):null;
 $('average').innerHTML=(s&&s.n?s.average.toFixed(1):'—')+' <span>일에 한 번</span>';
 $('summary').textContent=s?`${a} ~ ${b} · ${s.days}일 중 ${s.n}일 운동${isDemo?' · 예시 데이터':''}`:'오늘 이전의 올바른 시작일과 종료일을 선택하세요.';
 const ratio=s&&s.days?Math.round(s.n/s.days*100):0;$('ring').value=ratio;$('ratio').textContent=records.length?ratio+'%':'—';$('ring').setAttribute('aria-label','기간 중 운동한 날 '+ratio+'%');$('ratioDescription').textContent=s&&records.length?s.days+'일의 시간, '+s.n+'일의 운동.':'나의 기록을 연결해 보세요.';
-$('count').textContent=s?s.n+'일':'—';$('weekly').textContent=s?s.weekly.toFixed(1)+'일':'—';const last=records.filter(d=>d<=t).sort().at(-1);$('since').textContent=last?(day(t)-day(last))+'일':'—';
+$('count').textContent=s?s.n+'일':'—';$('weekly').textContent=s?s.weekly.toFixed(1)+'일':'—';const last=records.filter(d=>d<=t).sort().at(-1);$('since').textContent=last?(day(t)-day(last))+'일':'—';updateUrgency(last?day(t)-day(last):null);
 renderCalendar();
 $('rangeLabel').textContent=valid?a.replaceAll('-','.')+' — '+b.replaceAll('-','.'):'기간 설정';
 $('periodTabs').value=$('period').value;
