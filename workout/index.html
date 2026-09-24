@@ -567,7 +567,7 @@ $('periodTabs').value=$('period').value;
 $('sessionNote').textContent=isDemo?'예시 기록':token?'Google Calendar 연결됨':'개인 운동 대시보드';
 }
 
-function plannedDates(start,interval){const dates=[];for(let i=0;;i++){const offset=Math.round(i*interval);if(offset>=30)break;dates.push(date(day(start)+offset));}return dates;}
+function plannedDates(start,interval){const dates=[];for(let i=0;;i++){const offset=Math.floor(i*interval+1e-9);if(offset>=30)break;dates.push(date(day(start)+offset));}return dates;}
 function renderCalendar(){
  const t=today(),power=readPref('workout-goal-mode','standard')==='power',interval=power?2.3:2.6,plan=plannedDates(t,interval),planned=new Set(plan),key=records.join(',')+t+interval;
  if(key===calendarKey)return;calendarKey=key;
@@ -580,7 +580,7 @@ function renderCalendar(){
  if(host.swiper){host.swiper.update();host.swiper.slideTo(Math.max(0,current),0);host.swiper.updateAutoHeight(0);}else{host.setAttribute('initial-slide',String(Math.max(0,current)));}
  $('monthRange').textContent='좌우로 밀어서 월 이동';
  $('planDescription').textContent=(power?'파워':'표준')+' · 오늘부터 30일간 '+plan.length+'일 · 2~3일 간격';
- $('planDescription').title=t+' ~ '+date(day(t)+29)+' · 목표 간격 '+interval+'일을 정수 날짜로 반올림한 예시 계획입니다. 오늘을 첫 운동일로 가정하며, 실제 기록 및 Google 캘린더는 변경하지 않습니다.';
+ $('planDescription').title=t+' ~ '+date(day(t)+29)+' · 목표 간격 '+interval+'일을 기준으로 짧은 간격부터 배치한 예시 계획입니다. 오늘을 첫 운동일로 가정하며, 실제 기록 및 Google 캘린더는 변경하지 않습니다.';
 }
 
 function range(){const t=today();$('end').value=t;const p=$('period').value;if(p==='custom'){render();return;}$('start').value=p==='all'?(records[0]||t):date(day(t)-Number(p)+1);monthOffset=0;render();}
