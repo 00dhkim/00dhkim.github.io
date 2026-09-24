@@ -86,7 +86,7 @@
     function renderTrack(){const wrap=$('#miniTrack'),cap=18,n=state.plan.length;wrap.innerHTML=Array.from({length:Math.min(n,cap)},(_,i)=>{const at=n>cap?Math.round(i*(n-1)/(cap-1)):i;return `<i class="${at<state.index?'done':at===state.index&&!isComplete()?'now':''}"></i>`}).join('')}
     function beep(){try{state.audio??=new AudioContext();const o=state.audio.createOscillator(),g=state.audio.createGain();o.connect(g);g.connect(state.audio.destination);o.frequency.value=740;g.gain.setValueAtTime(.04,state.audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,state.audio.currentTime+.16);o.start();o.stop(state.audio.currentTime+.16)}catch{}}
     function stop(){state.running=false;clearInterval(state.timer);state.timer=null;}
-    function advance(){state.index++;state.remaining=state.plan[state.index]?.sec||0;if(!isComplete())beep();else stop();render()}
+    function advance(){state.index++;state.remaining=state.plan[state.index]?.sec||0;if(!isComplete()){if(state.running)state.finishAt=Date.now()+state.remaining*1000;beep()}else stop();render()}
     function tick(){state.remaining=Math.ceil((state.finishAt-Date.now())/1000);if(state.remaining<=0)advance();else render()}
     function startTimer(){if(isComplete()){resetTimer();}state.running=true;state.finishAt=Date.now()+state.remaining*1000;state.timer=setInterval(tick,250);render()}
     function pauseTimer(){if(!state.running)return;tick();stop();render()}
