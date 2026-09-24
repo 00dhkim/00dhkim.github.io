@@ -523,6 +523,12 @@
 .day.today::after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:#8174ce;bottom:2px;left:50%;transform:translateX(-50%);box-shadow:0 0 0 2px #fff}
 .day.today:hover{background:#f4f1fc}
 @media(max-width:760px){.day.today{font-size:13px;max-width:34px;width:100%;justify-self:center}.day.today::after{width:4px;height:4px;bottom:1px}}
+
+/* Today uses the calendar's existing rounded-square shape and primary color. */
+.day.today,.day.today.hit,.day.today.planned{display:grid;place-items:center;position:relative;border-radius:16px;background:var(--purple);color:#fff;border:0;outline:none;box-shadow:none;font-weight:600;line-height:normal;width:100%;max-width:none;justify-self:stretch;gap:0}
+.day.today::after{content:none;display:none}
+.day.today:hover{background:#5148bf;transform:none}
+@media(max-width:760px){.day.today,.day.today.hit,.day.today.planned{border-radius:11px;font-size:13px}}
 </style></head><body><div class="app-shell"><header><a class="brand" href="#" aria-label="Rhythm 홈"><span class="brand-symbol">r</span>rhythm<span class="brand-dot">.</span></a><div class="header-right"><sl-button id="refresh" size="small" variant="text"><sl-icon slot="prefix" name="arrow-clockwise"></sl-icon>동기화</sl-button><span id="sessionNote">개인 운동 대시보드</span><sl-button id="openSettings" circle aria-label="연결 설정"><sl-icon name="sliders" label="설정"></sl-icon></sl-button></div></header><main>
 
 
