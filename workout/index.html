@@ -534,6 +534,14 @@
 #ring{position:relative;overflow:visible}
 #ring::after{content:"";position:absolute;z-index:2;left:calc(50% - .5px);top:-2px;width:1px;height:10px;background:#4c4569;transform-origin:50% calc(var(--size)/2 + 2px);transform:rotate(var(--goal-angle,138.46deg));pointer-events:none}
 @media(max-width:760px){#ring::after{height:9px}}
+
+/* Fill means recorded workout; today changes typography only. */
+.day.today,.day.today.planned{background:transparent;color:#202334;font-weight:650;border:0;outline:none;box-shadow:none}
+.day.today.planned{border:1.5px dashed #a597e7}
+.day.today.hit{background:#e9e6fc;color:#202334;font-weight:650;border:0;outline:none;box-shadow:none}
+.day.today::after{display:none;content:none}
+.day.today:hover,.day.today.planned:hover{background:transparent}
+.day.today.hit:hover{background:#e9e6fc}
 </style></head><body><div class="app-shell"><header><a class="brand" href="#" aria-label="Rhythm 홈"><span class="brand-symbol">r</span>rhythm<span class="brand-dot">.</span></a><div class="header-right"><sl-button id="refresh" size="small" variant="text"><sl-icon slot="prefix" name="arrow-clockwise"></sl-icon>동기화</sl-button><span id="sessionNote">개인 운동 대시보드</span><sl-button id="openSettings" circle aria-label="연결 설정"><sl-icon name="sliders" label="설정"></sl-icon></sl-button></div></header><main>
 
 
