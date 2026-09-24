@@ -555,7 +555,7 @@ function updateUrgency(days){
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
 setInterval(()=>{if(!document.hidden)render();},60000);
 
-function renderTargets(){const mode=readPref('workout-goal-mode','standard')==='power'?'power':'standard';const interval=mode==='power'?2.3:2.6;const label=mode==='power'?'파워':'표준';$('goalMode').value=mode;$('intervalTarget').textContent=label+' 목표 · '+interval.toFixed(1)+'일에 한 번';$('weeklyTarget').textContent='목표 '+(7/interval).toFixed(1);$('countTarget').textContent='목표 '+(30/interval).toFixed(1);$('countTarget').title='현재 운동한 날은 선택한 기간의 실제 일수이며, 목표는 30일 기준 환산값입니다.';}
+function renderTargets(){const mode=readPref('workout-goal-mode','standard')==='power'?'power':'standard';const interval=mode==='power'?2.3:2.6;const label=mode==='power'?'파워':'표준';$('goalMode').value=mode;$('intervalTarget').textContent=label+' 목표 · '+interval.toFixed(1)+'일에 한 번';$('weeklyTarget').textContent='목표 '+(7/interval).toFixed(1)+'일';$('countTarget').textContent='목표 '+(30/interval).toFixed(1)+'일';$('countTarget').title='현재 운동한 날은 선택한 기간의 실제 일수이며, 목표는 30일 기준 환산값입니다.';}
 function render(){renderTargets();const t=today();$('end').max=t;$('start').max=t;let a=$('start').value,b=$('end').value;const valid=a&&b&&a<=b&&b<=t;const s=valid?stats(records,a,b):null;
 $('average').innerHTML=(s&&s.n?s.average.toFixed(1):'—')+' <span>일에 한 번</span>';
 $('summary').textContent=s?`${a} ~ ${b} · ${s.days}일 중 ${s.n}일 운동${isDemo?' · 예시 데이터':''}`:'오늘 이전의 올바른 시작일과 종료일을 선택하세요.';
