@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#11100f">
+  <meta name="description" content="워밍업과 반복 횟수를 조절하는 개인 인터벌 러닝 타이머">
+  <title>Interval — 러닝 타이머</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23161310'/%3E%3Cpath d='M7 21c5-9 9-13 18-14M10 25c4-5 8-8 14-9' fill='none' stroke='%23ff7540' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root { --bg:#11100f; --surface:#1a1816; --surface2:#211e1b; --line:#35302b; --text:#f6f2ec; --muted:#aaa29a; --orange:#ff7540; --orange-soft:#ffb181; --rest:#8db6ff; --warm:#eab66f; --ok:#8ccf9b; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); }
+    body { margin:0; min-width:320px; min-height:100vh; color:var(--text); background:radial-gradient(ellipse 75% 45% at 50% -10%,#382216 0%,transparent 65%),var(--bg); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    button,input { font:inherit; } button { border:0; cursor:pointer; } button:focus-visible,input:focus-visible { outline:3px solid #f5b18b; outline-offset:3px; }
+    main { max-width:560px; margin:0 auto; padding:30px 18px 50px; }
+    .top { display:flex; align-items:center; justify-content:space-between; margin-bottom:29px; }
+    .wordmark { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:800; letter-spacing:-.04em; }
+    .mark { width:25px; height:25px; display:grid; place-items:center; border-radius:7px; background:var(--orange); color:#271208; font-size:16px; line-height:1; }
+    .tag { color:var(--muted); font-size:12px; letter-spacing:.08em; font-weight:700; }
+    .status { margin-bottom:15px; color:var(--orange-soft); font-size:13px; font-weight:750; letter-spacing:.01em; }
+    h1 { margin:0; font-size:clamp(31px,8vw,45px); line-height:1.08; letter-spacing:-.065em; font-weight:800; }
+    .instruction { margin:10px 0 0; color:var(--muted); font-size:16px; line-height:1.5; }
+    .timer { margin:28px 0 24px; padding:25px 20px 20px; border:1px solid var(--line); border-radius:30px; background:linear-gradient(160deg,#201c18,#171513); box-shadow:0 28px 70px rgba(0,0,0,.3); }
+    .dial { --deg:0deg; --accent:var(--orange); width:min(74vw,340px); aspect-ratio:1; margin:0 auto 19px; padding:10px; border-radius:50%; background:conic-gradient(var(--accent) var(--deg),#39332e 0); position:relative; transition:background .25s ease; }
+    .dial::after { content:""; position:absolute; inset:17px; border:1px solid rgba(255,255,255,.06); border-radius:50%; pointer-events:none; }
+    .dial-inner { height:100%; border-radius:50%; background:#171411; display:grid; place-content:center; text-align:center; box-shadow:inset 0 0 35px rgba(0,0,0,.23); position:relative; z-index:1; }
+    .clock { font-size:clamp(64px,18vw,88px); font-weight:820; line-height:.95; letter-spacing:-.09em; font-variant-numeric:tabular-nums; }
+    .round { margin-top:11px; color:var(--muted); font-size:13px; font-weight:700; }
+    .mini-track { height:6px; display:flex; gap:4px; margin:0 2px 19px; }
+    .mini-track i { flex:1; min-width:3px; border-radius:999px; background:#3b342e; transition:background .2s,opacity .2s; }
+    .mini-track i.done { background:var(--orange); } .mini-track i.now { background:#ffb181; box-shadow:0 0 12px rgba(255,117,64,.65); }
+    .buttons { display:grid; grid-template-columns:1fr 1fr 44px; gap:9px; }
+    .primary,.secondary,.icon-button { min-height:52px; border-radius:15px; font-weight:800; letter-spacing:-.02em; transition:transform .15s,filter .15s,background .15s; } .primary:active,.secondary:active,.icon-button:active { transform:scale(.97); }
+    .primary { background:var(--orange); color:#2a130a; } .primary:hover { filter:brightness(1.08); }
+    .secondary,.icon-button { background:#2a2521; color:var(--text); border:1px solid #3c3630; } .secondary:hover,.icon-button:hover { background:#332d28; }
+    .icon-button { font-size:18px; padding:0; }
+    .settings { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 26px; }
+    .setting { padding:15px; border:1px solid var(--line); border-radius:19px; background:var(--surface); }
+    .setting-label { display:block; color:var(--muted); font-size:12px; font-weight:700; }
+    .stepper { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:10px; }
+    .stepper button { width:31px; height:31px; border-radius:10px; background:#312b26; color:var(--text); font-size:18px; line-height:1; } .stepper button:disabled { opacity:.38; cursor:not-allowed; }
+    .setting-value { min-width:52px; text-align:center; font-size:19px; font-weight:800; letter-spacing:-.05em; font-variant-numeric:tabular-nums; }
+    .plan-head { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:11px; }
+    h2 { margin:0; font-size:15px; letter-spacing:-.03em; } .total { color:var(--muted); font-size:13px; font-variant-numeric:tabular-nums; }
+    .plan { display:grid; gap:7px; }
+    .plan-row { display:grid; grid-template-columns:28px 1fr auto; align-items:center; gap:10px; min-height:52px; padding:8px 12px 8px 9px; border:1px solid transparent; border-radius:15px; background:rgba(36,31,27,.75); transition:background .2s,border .2s,opacity .2s; }
+    .plan-row.active { border-color:rgba(255,117,64,.7); background:#2d211a; } .plan-row.done { opacity:.42; }
+    .pill { width:28px; height:28px; display:grid; place-items:center; border-radius:9px; font-size:13px; font-weight:900; } .kind-warmup .pill { background:rgba(234,182,111,.14); color:var(--warm); } .kind-fast .pill { background:rgba(255,117,64,.15); color:var(--orange-soft); } .kind-rest .pill { background:rgba(141,182,255,.15); color:var(--rest); }
+    .row-name { font-size:14px; font-weight:760; letter-spacing:-.02em; } .row-help { display:block; margin-top:2px; color:var(--muted); font-size:12px; } .row-time { color:var(--muted); font-size:13px; font-variant-numeric:tabular-nums; }
+    .complete { display:none; margin:13px 0 0; padding:13px 14px; border-radius:14px; background:rgba(140,207,155,.12); color:#c4f1cd; font-weight:750; font-size:14px; } .complete.show { display:block; }
+    @media (max-width:390px) { main { padding:23px 13px 35px; } .timer { padding:20px 13px 14px; border-radius:25px; } .buttons { gap:7px; } .primary,.secondary { font-size:14px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="top"><div class="wordmark"><span class="mark">↗</span>INTERVAL</div><span class="tag">RUNNING</span></header>
+    <div class="status" id="status">READY TO RUN</div>
+    <h1 id="phase">워밍업 준비</h1>
+    <p class="instruction" id="instruction">빠른 걷기에서 가벼운 조깅으로 몸을 깨워요.</p>
+
+    <section class="timer" aria-label="러닝 타이머">
+      <div class="dial" id="dial"><div class="dial-inner"><div class="clock" id="clock" aria-live="polite">05:00</div><div class="round" id="round">워밍업 · 총 23:00</div></div></div>
+      <div class="mini-track" id="miniTrack" aria-hidden="true"></div>
+      <div class="buttons"><button class="primary" id="start" type="button">시작하기</button><button class="secondary" id="reset" type="button">처음부터</button><button class="icon-button" id="skip" type="button" aria-label="다음 구간으로 건너뛰기">›</button></div>
+      <div class="complete" id="complete" role="status">완료. 좋은 러닝이었어요.</div>
+    </section>
+
+    <section class="settings" aria-label="인터벌 설정">
+      <div class="setting"><span class="setting-label">워밍업</span><div class="stepper"><button type="button" data-target="warmup" data-change="-1" aria-label="워밍업 1분 줄이기">−</button><output class="setting-value" id="warmupValue">5분</output><button type="button" data-target="warmup" data-change="1" aria-label="워밍업 1분 늘리기">+</button></div></div>
+      <div class="setting"><span class="setting-label">빠른 달리기</span><div class="stepper"><button type="button" data-target="reps" data-change="-1" aria-label="반복 1회 줄이기">−</button><output class="setting-value" id="repsValue">6회</output><button type="button" data-target="reps" data-change="1" aria-label="반복 1회 늘리기">+</button></div></div>
+    </section>
+
+    <section aria-labelledby="planTitle"><div class="plan-head"><h2 id="planTitle">오늘의 리듬</h2><span class="total" id="total">예상 23:00</span></div><div class="plan" id="plan"></div></section>
+  </main>
+  <script>
+    const $=q=>document.querySelector(q), $$=q=>[...document.querySelectorAll(q)];
+    const state={warmup:5,reps:6,plan:[],index:0,remaining:0,running:false,finishAt:0,timer:null,audio:null};
+    const fmt=s=>`${String(Math.max(0,Math.floor(s))/60|0).padStart(2,'0')}:${String(Math.max(0,Math.floor(s))%60).padStart(2,'0')}`;
+    const config={warmup:{min:0,max:20,label:'분'},reps:{min:1,max:12,label:'회'}};
+    function makePlan(){const a=[];if(state.warmup)a.push({kind:'warmup',symbol:'○',name:'워밍업',help:'빠른 걷기 → 가벼운 조깅',sec:state.warmup*60,accent:'var(--warm)',status:'WARM UP'});for(let n=1;n<=state.reps;n++){a.push({kind:'fast',symbol:'↗',name:`빠르게 달리기 ${n}`,help:'체감강도 8/10',sec:60,accent:'var(--orange)',status:'PUSH'});a.push({kind:'rest',symbol:'↓',name:`회복 ${n}`,help:'걷기 또는 느린 조깅 · 3–4/10',sec:120,accent:'var(--rest)',status:'RECOVER'});}return a;}
+    function total(){return state.plan.reduce((n,x)=>n+x.sec,0)}
+    function renderPlan(){const showing=state.plan.length>10?[...state.plan.slice(0,4),{ellipsis:true},...state.plan.slice(-4)]:state.plan;$('#plan').innerHTML=showing.map((x,viewIndex)=>{if(x.ellipsis)return `<div class="plan-row" style="grid-template-columns:28px 1fr"><span class="pill">···</span><span class="row-name">${state.reps-4}회 반복 구간 생략</span></div>`;const realIndex=state.plan.indexOf(x), c=realIndex===state.index&&!isComplete()?'active':realIndex<state.index?'done':'';return `<div class="plan-row kind-${x.kind} ${c}"><span class="pill">${x.symbol}</span><span><span class="row-name">${x.name}</span><span class="row-help">${x.help}</span></span><span class="row-time">${fmt(x.sec)}</span></div>`}).join('');}
+    function isComplete(){return state.index>=state.plan.length}
+    function render(){const item=state.plan[state.index];$('#warmupValue').textContent=`${state.warmup}분`;$('#repsValue').textContent=`${state.reps}회`;$('#total').textContent=`예상 ${fmt(total())}`;$$('[data-target]').forEach(b=>{const t=b.dataset.target,d=Number(b.dataset.change);b.disabled=state.running||state[t]+d<config[t].min||state[t]+d>config[t].max}); if(!item){$('#status').textContent='FINISHED';$('#phase').textContent='오늘의 인터벌 완료';$('#instruction').textContent='호흡을 고르고 천천히 걸으며 마무리해요.';$('#clock').textContent='00:00';$('#round').textContent='완료';$('#dial').style.setProperty('--deg','360deg');$('#dial').style.setProperty('--accent','var(--ok)');$('#start').textContent='다시 시작';$('#complete').classList.add('show');renderPlan();renderTrack();return;}$('#status').textContent=item.status;$('#phase').textContent=item.name;$('#instruction').textContent=item.help;$('#clock').textContent=fmt(state.remaining);$('#round').textContent=item.kind==='warmup'?`워밍업 · 총 ${fmt(total())}`:`${Math.ceil((state.index+(state.warmup?0:1))/2)} / ${state.reps} 번째 인터벌`;$('#dial').style.setProperty('--deg',`${Math.max(0,((item.sec-state.remaining)/item.sec)*360)}deg`);$('#dial').style.setProperty('--accent',item.accent);$('#start').textContent=state.running?'일시정지':'계속하기';$('#complete').classList.remove('show');renderPlan();renderTrack();}
+    function renderTrack(){const wrap=$('#miniTrack'),cap=18,n=state.plan.length;wrap.innerHTML=Array.from({length:Math.min(n,cap)},(_,i)=>{const at=n>cap?Math.round(i*(n-1)/(cap-1)):i;return `<i class="${at<state.index?'done':at===state.index&&!isComplete()?'now':''}"></i>`}).join('')}
+    function beep(){try{state.audio??=new AudioContext();const o=state.audio.createOscillator(),g=state.audio.createGain();o.connect(g);g.connect(state.audio.destination);o.frequency.value=740;g.gain.setValueAtTime(.04,state.audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,state.audio.currentTime+.16);o.start();o.stop(state.audio.currentTime+.16)}catch{}}
+    function stop(){state.running=false;clearInterval(state.timer);state.timer=null;}
+    function advance(){state.index++;state.remaining=state.plan[state.index]?.sec||0;if(!isComplete())beep();else stop();render()}
+    function tick(){state.remaining=Math.ceil((state.finishAt-Date.now())/1000);if(state.remaining<=0)advance();else render()}
+    function startTimer(){if(isComplete()){resetTimer();}state.running=true;state.finishAt=Date.now()+state.remaining*1000;state.timer=setInterval(tick,250);render()}
+    function pauseTimer(){if(!state.running)return;tick();stop();render()}
+    function resetTimer(){stop();state.plan=makePlan();state.index=0;state.remaining=state.plan[0]?.sec||0;render()}
+    $('#start').addEventListener('click',()=>state.running?pauseTimer():startTimer());$('#reset').addEventListener('click',resetTimer);$('#skip').addEventListener('click',()=>{if(!isComplete()){stop();advance()}});$$('[data-target]').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.target;state[t]=Math.min(config[t].max,Math.max(config[t].min,state[t]+Number(b.dataset.change)));resetTimer()}));resetTimer();
+  </script>
+</body>
+</html>
